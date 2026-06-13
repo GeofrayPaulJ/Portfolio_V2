@@ -104,7 +104,7 @@ export default function ResumePage() {
                   <div className="absolute w-3 h-3 bg-sky-500 rounded-full -left-[6.5px] top-1.5 shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="text-xl font-bold">Junior AI Engineer</h3>
-                    <span className="text-sm font-mono text-muted-foreground">2024 to Present</span>
+                    <span className="text-sm font-mono text-muted-foreground">2025 to Present</span>
                   </div>
                   <p className="text-sky-500 font-medium mb-6 text-sm uppercase tracking-wider">Sudha Gopalakrishnan Brain Centre, IIT Madras</p>
                   
