@@ -111,22 +111,31 @@ export default function ResumePage() {
                   <div className="space-y-8">
                     {/* Subsection 1 */}
                     <div>
-                      <h4 className="text-xs font-bold uppercase text-zinc-400 mb-4 tracking-widest border-b border-border/50 pb-2">Pipeline Architecture & Computational Pathology</h4>
+                      <h4 className="text-xs font-bold uppercase text-zinc-400 mb-4 tracking-widest border-b border-border/50 pb-2">Model Evaluation, Benchmarking & Failure Diagnosis</h4>
                       <ul className="space-y-4 text-muted-foreground list-disc pl-4">
-                        <li><strong>CD34 Segmentation:</strong> Built an nnU-Net V2 semantic segmentation pipeline to automate microvascular density quantification in CD34-stained whole slide images at gigapixel scale.</li>
-                        <li><strong>Artefact Elimination:</strong> Implemented WSI tiling with 50% stride and overlap averaging to eliminate prediction edge artefacts across multi-gigabyte tissue scans.</li>
-                        <li><strong>IHC Inference Engine:</strong> Developed a multi-marker IHC backend quantifying CD68, CD34, Astrocytes, and Beta-Amyloid across diverse tissue samples, integrating spatial annotations for high-fidelity masking.</li>
-                        <li><strong>MRI Standardisation:</strong> Built a hardware-agnostic MRI preprocessing pipeline using MONAI, ANTs, and SimpleITK to standardise raw SAG T1 MPRAGE and ASL sequences with isotropic resampling (0.5mm³).</li>
+                        <li><strong>AIMS-TBI, MICCAI 2026:</strong> Built and submitted a full nnU-Net v2 ResEnc-M segmentation pipeline (552 subjects, 5-fold cross-validation) for brain lesion analysis, ranking 6th of 15 teams on both Dice and HD95. Ran a custom per-case surface-distance audit that traced the 13th-place ASSD ranking to roughly 22 catastrophic outlier cases (7.2% of the set) rather than systemic boundary error — median case-level ASSD of 2.4mm was competitive with the leading entries.</li>
+                        <li><strong>Lesion Detection Classifier:</strong> Calibrated a lesion-detection classifier directly from existing segmentation output via an out-of-fold volume-threshold sweep, reaching 86% balanced accuracy (86.3% sensitivity / 85.7% specificity) with a negligible optimism gap between training and held-out estimates.</li>
+                        <li><strong>HookNet Grey/White Matter Segmentation:</strong> H&E, multi-slide pooled training reaching Dice 0.84 / 0.75 / 0.85 (background / white matter / grey matter). Diagnosed a stagnant boundary metric (NSD@10 = 0.056) to a coarse 547-vertex ground-truth polygon rather than a model or metric defect, confirmed via a per-class tau-sweep control test — redirected the team toward re-annotation instead of further training spend.</li>
                       </ul>
                     </div>
 
                     {/* Subsection 2 */}
                     <div>
-                      <h4 className="text-xs font-bold uppercase text-zinc-400 mb-4 tracking-widest border-b border-border/50 pb-2">MLOps, Infrastructure & Data Provenance</h4>
+                      <h4 className="text-xs font-bold uppercase text-zinc-400 mb-4 tracking-widest border-b border-border/50 pb-2">Computational Pathology & Radiology Pipelines</h4>
                       <ul className="space-y-4 text-muted-foreground list-disc pl-4">
-                        <li><strong>Cluster Optimisation:</strong> Managed training loops using NVIDIA Nsight Systems, AMP, and DDP to reduce memory bottlenecks across a DGX A100 cluster (640GB aggregate VRAM).</li>
-                        <li><strong>Asynchronous Processing:</strong> Deployed scalable analysis platforms utilising Django, Celery, and Redis for high-throughput inference.</li>
-                        <li><strong>Relational Architecture:</strong> Architected the central data model for a neurological specimen tracking system, mapping the physical lifecycle from wet-lab sectioning and staining to QR-coded digital storage.</li>
+                        <li><strong>CD34 Microvessel Segmentation:</strong> nnU-Net v2 pipeline automating density quantification across gigapixel whole-slide images; eliminated tile-boundary artefacts via overlap-averaged inference.</li>
+                        <li><strong>IHC Analysis Platform:</strong> Multi-marker inference backend (CD68, CD34, astrocyte, beta-amyloid quantification) behind a single React + Django + Celery interface; resolved container-crash failures under 150GB+ TIFF workloads.</li>
+                        <li><strong>MRI Preprocessing Pipeline:</strong> Four-phase, hardware-agnostic pipeline (pydicom, ANTsPy, SimpleITK, MONAI) standardising raw post-mortem foetal MRI (SAG T1 MPRAGE, ASL) to 0.5mm³ isotropic, nnU-Net-ready volumes; built for zero-engineering-knowledge operation by end-user researchers.</li>
+                      </ul>
+                    </div>
+
+                    {/* Subsection 3 */}
+                    <div>
+                      <h4 className="text-xs font-bold uppercase text-zinc-400 mb-4 tracking-widest border-b border-border/50 pb-2">MLOps, Infrastructure & Systems Architecture</h4>
+                      <ul className="space-y-4 text-muted-foreground list-disc pl-4">
+                        <li><strong>Cluster Optimisation:</strong> Profiled and tuned training loops on a DGX A100 cluster using NVIDIA Nsight Systems, AMP, and DDP.</li>
+                        <li><strong>Neurological Asset Tracking System:</strong> Interviewed lab personnel to surface physical edge cases across the specimen lifecycle (sectioning, staining, QR-coded digital storage); architected the relational data model and ORM layer, built the tracking interface, and delivered BPMN/UML workflow diagrams to the CSO.</li>
+                        <li><strong>Asynchronous Processing:</strong> Django, Celery, and Redis platforms for high-throughput, non-blocking inference.</li>
                       </ul>
                     </div>
                   </div>
