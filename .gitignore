@@ -46,3 +46,8 @@ next-env.d.ts
 .vscode/*
 !.vscode/extensions.json
 *.log
+
+# local handoff material (never commit)
+_sources/
+_handoff/
+CLAUDE.local.md
