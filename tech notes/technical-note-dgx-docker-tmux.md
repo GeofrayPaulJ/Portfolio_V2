@@ -40,7 +40,7 @@ The workspace is mounted at `/workspace`, mapped to persistent storage on the ho
 # Typical training output path inside container
 /workspace/nnUNet_results/
 /workspace/nnUNet_raw/
-/workspace/CD34_Pipeline/
+/workspace/project/
 ```
 
 **Rule:** Nothing important lives in the container's root filesystem. If it matters, it goes to `/workspace`.

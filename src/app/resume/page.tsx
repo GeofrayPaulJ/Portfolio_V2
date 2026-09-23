@@ -84,7 +84,7 @@ export default function ResumePage() {
         >
           <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-6">Profile</h2>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            AI Engineer based at the Sudha Gopalakrishnan Brain Centre (IIT Madras), specialising in production-grade deep learning systems for medical imaging. Focused on building reliable, end-to-end infrastructure, from segmentation architectures and GPU-optimised training loops to scalable clinical inference backends. Experienced in translating raw wet-lab data into clinical-grade models. Available for targeted technical consulting in Terabyte-scale computational pathology and radiology workflows.
+            AI Engineer based at the Sudha Gopalakrishnan Brain Centre (IIT Madras), specialising in production-grade deep learning systems for medical imaging. Focused on building reliable, end-to-end infrastructure, from segmentation architectures and GPU-optimised training loops to scalable clinical inference backends. Experienced in translating raw wet-lab data into clinical-grade models.
           </p>
         </motion.section>
 

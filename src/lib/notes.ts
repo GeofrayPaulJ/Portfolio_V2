@@ -45,17 +45,6 @@ const notesMap: Record<string, NoteMetadata> = {
     slug: "wsi-tile-boundary",
     filename: "technical-note-wsi-tile-boundary.md",
   },
-  "nnunet-baseline-mandate": {
-    number: "04",
-    title:
-      "The Baseline Mandate: nnU-Net V2 Before U-Mamba in CD34 Vascular Segmentation",
-    tags: ["Architecture", "nnU-Net", "U-Mamba"],
-    readTime: "6 min",
-    description:
-      "Why no experimental architecture is deployed without an unassailable baseline, and what patch myopia means for branching capillary network reconstruction.",
-    slug: "nnunet-baseline-mandate",
-    filename: "", // No markdown file yet
-  },
   "mri-preprocessing-pipeline": {
     number: "05",
     title:

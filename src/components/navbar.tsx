@@ -11,7 +11,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
   { label: 'Expertise', href: '#expertise' },
-  { label: 'Services', href: '#services' },
   { label: 'Projects', href: '#projects' },
   { label: 'Technical Notes', href: '#documentation' },
   { label: 'Alfred AI', href: '#ai-agent' },
@@ -91,7 +90,7 @@ export default function Navbar() {
     setIsOpen(false);
   };
 
-  const handleHireMe = () => {
+  const handleContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
@@ -169,7 +168,7 @@ export default function Navbar() {
               )}
 
               <Button
-                onClick={handleHireMe}
+                onClick={handleContact}
                 className="ml-2 bg-primary text-primary-foreground hover:bg-secondary hover:text-secondary-foreground px-6 py-2 h-10 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
               >
                 Contact
@@ -264,7 +263,7 @@ export default function Navbar() {
                   </div>
                   <Button
                     onClick={() => {
-                      handleHireMe();
+                      handleContact();
                       setIsOpen(false);
                     }}
                     className="w-full bg-primary text-primary-foreground hover:bg-secondary hover:text-secondary-foreground h-12 rounded-xl shadow-lg"

@@ -99,9 +99,8 @@ export default function ContactSection() {
               Book a 30-minute call
             </h3>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
-              For scoped consulting in computational pathology, radiology, or
-              foundation-model adaptation. Pick a time that suits you, with no forms
-              and no back-and-forth.
+              For research collaboration, roles, or questions about this work.
+              Pick a time that suits you.
             </p>
             <Button
               nativeButton={false}

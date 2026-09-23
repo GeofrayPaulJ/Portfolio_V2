@@ -13,13 +13,13 @@ interface Message {
 const INITIAL_MESSAGE: Message = {
   role: "alfred",
   content:
-    "Hello. I'm Alfred, Geofray's technical assistant. I have his full portfolio in context: the IHC analysis platform, the MLOps infrastructure, and his consulting availability. What would you like to know?",
+    "Hello. I'm Alfred, Geofray's technical assistant. I can take you through his engineering work, his MICCAI 2026 challenge entries and his technical notes. What would you like to know?",
 };
 
 const DEFAULT_SUGGESTIONS = [
+  "What did the AIMS-TBI paper find?",
+  "How did RARE26 predict its own leaderboard?",
   "Tell me about the CD34 pipeline",
-  "What infrastructure does Geofray use?",
-  "Is he available for consulting?",
 ];
 
 // Extracts trailing JSON chip array from Alfred's response

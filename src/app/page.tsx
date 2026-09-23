@@ -6,8 +6,6 @@ import TechnicalNotesSection from "@/components/technical-notes-section";
 import ContactSection from "@/components/contact-section";
 import ParticlesBackground from "@/components/particles-background";
 
-import ServicesSection from "@/components/services-section";
-
 export default function Home() {
   return (
     <>
@@ -17,7 +15,6 @@ export default function Home() {
       <div className="relative z-10">
         <HeroSection />
         <ExpertiseSection />
-        <ServicesSection />
         <ProjectsSection />
         <TechnicalNotesSection />
         <AiAgentSection />
