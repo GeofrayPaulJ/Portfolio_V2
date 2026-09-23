@@ -2,6 +2,7 @@ import HeroSection from "@/components/hero-section";
 import ProjectsSection from "@/components/projects-section";
 import ExpertiseSection from "@/components/expertise-section";
 import AiAgentSection from "@/components/ai-agent-section";
+import ChallengesSection from "@/components/challenges-section";
 import TechnicalNotesSection from "@/components/technical-notes-section";
 import ContactSection from "@/components/contact-section";
 import ParticlesBackground from "@/components/particles-background";
@@ -16,6 +17,7 @@ export default function Home() {
         <HeroSection />
         <ExpertiseSection />
         <ProjectsSection />
+        <ChallengesSection />
         <TechnicalNotesSection />
         <AiAgentSection />
         <ContactSection />
