@@ -64,6 +64,16 @@ export const notes: NoteMetadata[] = [
     slug: "ihc-platform",
     filename: "technical-note-ihc-platform.md",
   },
+  {
+    number: "07",
+    title: "Your GPU Is Lying To You",
+    tags: ["MLOps", "Containers", "Verification"],
+    readTime: "16 min",
+    description:
+      "Six instruments that reported success while being wrong during a MICCAI 2026 challenge submission, and a ten-point preflight checklist that catches each one without restricted data.",
+    slug: "gpu-is-lying",
+    filename: "technical-note-gpu-is-lying.md",
+  },
 ];
 
 export function getNoteMetadata(slug: string): NoteMetadata | null {

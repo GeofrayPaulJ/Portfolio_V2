@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Download, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { challenges } from "@/lib/challenges-meta";
 
 export default function ResumePage() {
   return (
@@ -113,8 +114,6 @@ export default function ResumePage() {
                     <div>
                       <h4 className="text-xs font-bold uppercase text-zinc-400 mb-4 tracking-widest border-b border-border/50 pb-2">Model Evaluation, Benchmarking & Failure Diagnosis</h4>
                       <ul className="space-y-4 text-muted-foreground list-disc pl-4">
-                        <li><strong>AIMS-TBI, MICCAI 2026:</strong> Built and submitted a full nnU-Net v2 ResEnc-M segmentation pipeline (552 subjects, 5-fold cross-validation) for brain lesion analysis, ranking 6th of 15 teams on both Dice and HD95. Ran a custom per-case surface-distance audit that traced the 13th-place ASSD ranking to roughly 22 catastrophic outlier cases (7.2% of the set) rather than systemic boundary error — median case-level ASSD of 2.4mm was competitive with the leading entries.</li>
-                        <li><strong>Lesion Detection Classifier:</strong> Calibrated a lesion-detection classifier directly from existing segmentation output via an out-of-fold volume-threshold sweep, reaching 86% balanced accuracy (86.3% sensitivity / 85.7% specificity) with a negligible optimism gap between training and held-out estimates.</li>
                         <li><strong>HookNet Grey/White Matter Segmentation:</strong> H&E, multi-slide pooled training reaching Dice 0.84 / 0.75 / 0.85 (background / white matter / grey matter). Diagnosed a stagnant boundary metric (NSD@10 = 0.056) to a coarse 547-vertex ground-truth polygon rather than a model or metric defect, confirmed via a per-class tau-sweep control test — redirected the team toward re-annotation instead of further training spend.</li>
                       </ul>
                     </div>
@@ -141,6 +140,47 @@ export default function ResumePage() {
                   </div>
                 </div>
               </div>
+            </motion.section>
+
+            {/* Publications */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="pt-8 border-t border-border/50"
+            >
+              <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-6">Publications</h2>
+              <div>
+                <h3 className="text-lg font-bold leading-snug">
+                  Diagnosing the Recall Tail: A Class-Imbalance Study of nnU-Net for Detection and Segmentation of Heterogeneous Moderate–Severe TBI Lesions
+                </h3>
+                <p className="text-sm text-muted-foreground mt-2">Geofray Paul J (sole author)</p>
+                <p className="text-sky-500 font-medium text-sm mt-1">Accepted, AIMS-TBI 2026 challenge paper, MICCAI 2026.</p>
+              </div>
+            </motion.section>
+
+            {/* Challenges */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="pt-8 border-t border-border/50"
+            >
+              <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-2">Challenges (MICCAI 2026)</h2>
+              <p className="text-sm text-muted-foreground mb-6">Entered as an independent researcher.</p>
+              <ul className="space-y-3 text-muted-foreground">
+                {challenges.map((challenge) => (
+                  <li key={challenge.slug}>
+                    <Link
+                      href={`/challenges/${challenge.slug}`}
+                      className="font-semibold text-foreground hover:text-sky-500 underline-offset-2 hover:underline transition-colors"
+                    >
+                      {challenge.name}
+                    </Link>
+                    <span>: {challenge.result}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.section>
 
             {/* Education */}
