@@ -8,6 +8,7 @@ const MAX_MESSAGE_CHARS = 2000;
 // Thinking tokens count toward this cap: a ~120-word reply plus the chip line, with headroom.
 const MAX_OUTPUT_TOKENS = 600;
 const UPSTREAM_TIMEOUT_MS = 25000;
+const RETRY_DELAY_MS = 1000;
 
 const FALLBACK_TEXT =
   "The line to Mr. Paul's archive is engaged. Please try again in a minute, or use the contact form below.";
@@ -84,20 +85,28 @@ export async function POST(req: NextRequest) {
         client ??= new GoogleGenAI({ apiKey: process.env.GOOGLE_AI_API_KEY });
         systemInstruction ??= buildSystemInstruction();
 
-        const response = await client.models.generateContentStream({
-          model: MODEL,
-          contents,
-          config: {
-            systemInstruction,
-            temperature: 0.3,
-            maxOutputTokens: MAX_OUTPUT_TOKENS,
-            thinkingConfig: { thinkingLevel: ThinkingLevel.MINIMAL },
-            httpOptions: {
-              timeout: UPSTREAM_TIMEOUT_MS,
-              retryOptions: { attempts: 1 },
+        const request = () =>
+          client!.models.generateContentStream({
+            model: MODEL,
+            contents,
+            config: {
+              systemInstruction: systemInstruction!,
+              temperature: 0.3,
+              maxOutputTokens: MAX_OUTPUT_TOKENS,
+              thinkingConfig: { thinkingLevel: ThinkingLevel.MINIMAL },
+              httpOptions: { timeout: UPSTREAM_TIMEOUT_MS },
             },
-          },
-        });
+          });
+
+        // One retry for transient "high demand" 503s; 429s go straight to the fallback to spare quota.
+        let response;
+        try {
+          response = await request();
+        } catch (err) {
+          if ((err as { status?: number })?.status !== 503) throw err;
+          await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
+          response = await request();
+        }
 
         for await (const chunk of response) {
           const text = chunk.text;

@@ -1,17 +1,13 @@
 ---
-title: "Hardware Architecture & Enterprise MLOps Deployment"
+title: "Enterprise MLOps Infrastructure (Work Experience)"
 category: "infrastructure"
 date: "2026-04-22"
-technologies: ["NVIDIA DGX A100", "Docker", "WSL2", "PyTorch", "Antigravity IDE"]
+technologies: ["NVIDIA DGX A100", "Docker", "NGC PyTorch", "tmux", "Nsight Systems", "AMP", "DDP"]
 ---
 
-### High-Performance Local Infrastructure
-Engineered a crash-resilient local workstation optimized for sustained deep learning workloads, serving as the primary staging environment before enterprise deployment.
-* **Compute Foundation:** Powered by an Intel Core i7 (14th Gen) paired with 128GB of RAM, ensuring zero bottlenecks during the manipulation of high-resolution, multi-gigabyte medical datasets.
-* **GPU Acceleration:** A single 16 GB consumer GPU.
-* **Virtualization & Storage:** Docker Desktop and underlying WSL2 virtual hard disks are strictly isolated on a dedicated 683 GB NTFS volume. The environment runs the `nvcr.io/nvidia/pytorch:25.12-py3` container with persistent `tmux` session management natively tethered to Google's Antigravity IDE.
-
 ### Enterprise HPC Deployment (NVIDIA DGX A100)
-Extensive experience deploying and maintaining production-grade medical pipelines on enterprise-tier High-Performance Computing (HPC) clusters.
-* **DGX Administration:** Held `sudo` access to an NVIDIA DGX A100 (640GB) system, navigating rigorous institutional governance and strict compliance chains (Team Lead -> Principal Investigator -> Chief Scientific Officer) for resource allocation.
-* **Production Migration:** Successfully engineered a hybrid deployment pipeline; trained the highly complex nnU-Net v2 CD34 model locally, and subsequently orchestrated the deployment of the complete IHC analysis platform directly onto the DGX A100 cluster for high-throughput inference.
+Work experience deploying and maintaining production-grade medical pipelines on an institutional High-Performance Computing (HPC) system.
+* **DGX Administration:** Held `sudo` access to an NVIDIA DGX A100 (640GB) system, navigating institutional governance and a compliance chain (Team Lead -> Principal Investigator -> Chief Scientific Officer) for resource allocation.
+* **Production Migration:** Trained the nnU-Net v2 CD34 model and orchestrated the deployment of the complete IHC analysis platform onto the DGX A100 cluster for high-throughput inference.
+* **Container environment:** Each researcher is allocated one 80GB GPU inside a persistent `nvcr.io/nvidia/pytorch:25.12-py3` container. Work lives on a `/workspace` volume mount; multi-day training runs inside `tmux` sessions so SSH disconnections cannot kill them; a Python venv inside the container isolates MONAI Label from nnU-Net V2's pinned NumPy version.
+* **Profiling:** Profiled and tuned training loops with NVIDIA Nsight Systems, AMP and DDP, capturing a narrow mid-training window (`nsys profile --delay --duration`) every 50 epochs rather than profiling whole runs.

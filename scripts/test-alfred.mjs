@@ -1,18 +1,61 @@
-// Posts six questions to Alfred on a running dev server and prints each reply.
+// Posts questions to Alfred on a running dev server, prints each reply and checks it.
 // Usage: node scripts/test-alfred.mjs [baseUrl]   (default http://localhost:3000)
 const BASE = process.argv[2] || "http://localhost:3000";
 const PAUSE_MS = 5000;
 
-const QUESTIONS = [
-  "hello",
-  "What did the AIMS-TBI paper find?",
-  "How did RARE26 predict its own leaderboard?",
-  "What limited the TopAneu pipeline?",
-  "What GPU did he use?",
-  "Is he available for consulting?",
+const DEFLECTION = "falls outside what I've been briefed on";
+const FALLBACK_MARKER = "The line to Mr. Paul's archive is engaged";
+const CHALLENGE_TERMS = /challenge|MICCAI|AIMS-TBI|RARE26|TopAneu|Educational|leaderboard/i;
+const EMPLOYER_TERMS = /SGBC|Sudha|Gopalakrishnan|IIT/i;
+
+const answersChallenge = (reply) => [
+  !reply.includes(DEFLECTION) || "deflected instead of answering from the knowledge base",
+  !EMPLOYER_TERMS.test(reply) || "mentions the employer in a challenge answer",
 ];
 
-const FALLBACK_MARKER = "The line to Mr. Paul's archive is engaged";
+const QUESTIONS = [
+  { q: "hello", checks: () => [] },
+  { q: "What did the AIMS-TBI paper find?", checks: answersChallenge },
+  { q: "How did RARE26 predict its own leaderboard?", checks: answersChallenge },
+  { q: "What limited the TopAneu pipeline?", checks: answersChallenge },
+  {
+    q: "What GPU did he use?",
+    checks: (reply, prose) => [
+      /16 GB consumer GPU/i.test(reply) || "does not give the challenge hardware as a 16 GB consumer GPU",
+      !sentences(prose).some((s) => /A100|DGX/i.test(s) && CHALLENGE_TERMS.test(s)) ||
+        "connects the DGX A100 to a challenge in the same sentence",
+      sentences(prose).length <= 2 || `answer is ${sentences(prose).length} sentences, expected one or two`,
+    ],
+  },
+  {
+    q: "What GPU did he use for the AIMS-TBI challenge?",
+    checks: (reply) => [
+      /16 GB consumer GPU/i.test(reply) || "does not say a single 16 GB consumer GPU",
+      !/A100|DGX/i.test(reply) || "mentions the DGX A100 in a challenge answer",
+      !EMPLOYER_TERMS.test(reply) || "mentions the employer in a challenge answer",
+    ],
+  },
+  {
+    q: "Is he available for consulting?",
+    checks: (reply) => [
+      reply.includes(DEFLECTION) || "does not use the standard deflection",
+      !/\brates?\b|\bSOW\b|BYOC|engagement/i.test(reply) || "contains consulting content",
+    ],
+  },
+];
+
+const GLOBAL_CHECKS = (reply) => [
+  !/RTX|5060|\bT4\b/i.test(reply) || "names a GPU model",
+  !/\b(leading|winner|winning|first place|1st place)\b/i.test(reply) || "uses banned placement wording",
+];
+
+function sentences(prose) {
+  return prose
+    .replace(/\b(Mr|Mrs|Ms|Dr|vs|e\.g|i\.e)\./g, "$1")
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
 
 async function ask(question) {
   const res = await fetch(`${BASE}/api/alfred-cs`, {
@@ -29,34 +72,41 @@ async function ask(question) {
     if (!data || data === "[DONE]") continue;
     text += JSON.parse(data).text ?? "";
   }
-  return text;
+  return text.trim();
 }
 
-function finalLineChips(text) {
-  const lastLine = text.trim().split("\n").pop().trim();
+function splitChips(text) {
+  const lines = text.split("\n");
+  const last = lines.pop().trim();
   try {
-    const chips = JSON.parse(lastLine);
-    return Array.isArray(chips) && chips.length === 2 && chips.every((c) => typeof c === "string")
-      ? chips
-      : null;
+    const chips = JSON.parse(last);
+    if (Array.isArray(chips) && chips.length === 2 && chips.every((c) => typeof c === "string")) {
+      return { prose: lines.join("\n").trim(), chips };
+    }
   } catch {
-    return null;
+    // not a chip line
   }
+  return { prose: text, chips: null };
 }
 
 let failures = 0;
-for (const [i, question] of QUESTIONS.entries()) {
+for (const [i, { q, checks }] of QUESTIONS.entries()) {
   if (i) await new Promise((r) => setTimeout(r, PAUSE_MS));
-  console.log(`\n=== Q${i + 1}: ${question}`);
+  console.log(`\n=== Q${i + 1}: ${q}`);
   try {
-    const reply = await ask(question);
-    console.log(reply.trim());
-    const chips = finalLineChips(reply);
-    const fallback = reply.includes(FALLBACK_MARKER);
-    console.log(`--- chips: ${chips ? "OK (2-item JSON array on final line)" : "FAIL"}${fallback ? " | UPSTREAM FALLBACK SERVED" : ""}`);
-    if (!chips || fallback) failures++;
+    const reply = await ask(q);
+    console.log(reply);
+    const { prose, chips } = splitChips(reply);
+    const problems = [
+      chips ? true : "final line is not a two-item JSON array",
+      !reply.includes(FALLBACK_MARKER) || "upstream fallback was served",
+      ...GLOBAL_CHECKS(reply),
+      ...checks(reply, prose),
+    ].filter((r) => r !== true);
+    console.log(problems.length ? `--- FAIL: ${problems.join("; ")}` : "--- PASS");
+    if (problems.length) failures++;
   } catch (err) {
-    console.log(`--- request failed: ${err.message}`);
+    console.log(`--- FAIL: request failed: ${err.message}`);
     failures++;
   }
 }
