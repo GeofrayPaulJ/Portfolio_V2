@@ -1,6 +1,7 @@
 import { GoogleGenAI, ThinkingLevel, type Content } from "@google/genai";
 import { NextRequest } from "next/server";
 import { buildSystemInstruction } from "@/lib/alfred-knowledge";
+import { extractChips } from "@/lib/chips";
 
 const MODEL = process.env.ALFRED_MODEL || "gemini-3.5-flash-lite";
 const HISTORY_TURNS = 8;
@@ -29,21 +30,6 @@ function toContents(messages: IncomingMessage[]): Content[] {
   }));
   while (contents.length && contents[0].role !== "user") contents.shift();
   return contents;
-}
-
-function endsWithTwoChips(text: string): boolean {
-  const lastBracket = text.lastIndexOf("[");
-  if (lastBracket === -1) return false;
-  try {
-    const chips = JSON.parse(text.slice(lastBracket).trim());
-    return (
-      Array.isArray(chips) &&
-      chips.length === 2 &&
-      chips.every((c) => typeof c === "string")
-    );
-  } catch {
-    return false;
-  }
 }
 
 function describeError(err: unknown): string {
@@ -116,7 +102,7 @@ export async function POST(req: NextRequest) {
           }
         }
 
-        if (!endsWithTwoChips(full)) send(`\n${JSON.stringify(FALLBACK_CHIPS)}`);
+        if (!extractChips(full).chips.length) send(`\n${JSON.stringify(FALLBACK_CHIPS)}`);
       } catch (err) {
         console.error("Alfred upstream error:", describeError(err));
         send(`${full ? "\n\n" : ""}${FALLBACK_TEXT}\n${JSON.stringify(FALLBACK_CHIPS)}`);

@@ -15,7 +15,7 @@ export const challenges: ChallengeMetadata[] = [
     name: "AIMS-TBI 2026",
     context: "MICCAI 2026 · Lesion detection and segmentation in moderate–severe TBI",
     result:
-      "Detection 8th, segmentation 11th · public leaderboard (preliminary)",
+      "8th on the final detection leaderboard; 11th on segmentation (official ranking announced 1 October 2026)",
     finding:
       "What looked like poor lesion boundaries was a small-lesion recall tail: 7.2% of cases failed outright, none above the median lesion volume, and removing them lowered mean surface distance from 8.55 to 6.19 mm.",
     tags: ["Segmentation", "Detection", "nnU-Net"],

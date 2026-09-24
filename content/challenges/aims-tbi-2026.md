@@ -6,12 +6,12 @@
 
 ## Result
 
-| Task | Position | Scores |
-|---|---|---|
-| Detection | 8th, public leaderboard (preliminary) | balanced accuracy 0.8457; sensitivity 0.8625; specificity 0.8289 |
-| Segmentation | 11th, public leaderboard (preliminary) | lesion-containing Dice 0.5048; HD95 30.7638 mm; ASSD 11.1496 mm |
+8th on the final detection leaderboard; 11th on segmentation (official ranking announced 1 October 2026).
 
-The organisers describe the Grand Challenge ranking as preliminary. The official ranking is announced at the in-person event in Strasbourg on 1 October 2026.
+| Task | Final-phase scores |
+|---|---|
+| Detection | balanced accuracy 0.8457; sensitivity 0.8625; specificity 0.8289 |
+| Segmentation | lesion-containing Dice 0.5048; HD95 30.7638 mm; ASSD 11.1496 mm |
 
 Paper: "Diagnosing the Recall Tail: A Class-Imbalance Study of nnU-Net for Detection and Segmentation of Heterogeneous Moderate–Severe TBI Lesions" (sole author, independent researcher). Accepted; camera-ready submitted.
 

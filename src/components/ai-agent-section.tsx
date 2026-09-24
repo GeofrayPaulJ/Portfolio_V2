@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Search, Send, Loader2 } from "lucide-react";
+import { extractChips } from "@/lib/chips";
 
 interface Message {
   role: "user" | "alfred";
@@ -22,33 +23,6 @@ const DEFAULT_SUGGESTIONS = [
   "Tell me about the CD34 pipeline",
 ];
 
-// Extracts trailing JSON chip array from Alfred's response
-// e.g. '...answer text...\n["Q1?", "Q2?"]'
-function extractChips(text: string): {
-  clean: string;
-  chips: string[];
-} {
-  const lastBracket = text.lastIndexOf("[");
-  if (lastBracket === -1) return { clean: text.trim(), chips: [] };
-
-  const candidate = text.slice(lastBracket).trim();
-  try {
-    const chips = JSON.parse(candidate) as string[];
-    if (
-      Array.isArray(chips) &&
-      chips.length >= 2 &&
-      chips.every((c) => typeof c === "string")
-    ) {
-      return {
-        clean: text.slice(0, lastBracket).trim(),
-        chips
-      };
-    }
-  } catch {
-    // Not valid JSON, leave as is
-  }
-  return { clean: text.trim(), chips: [] };
-}
 export default function AiAgentSection() {
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
   const [inputValue, setInputValue] = useState("");

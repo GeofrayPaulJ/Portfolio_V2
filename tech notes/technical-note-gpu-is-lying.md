@@ -10,7 +10,7 @@
 
 ## The tutorial I meant to write
 
-In June and July 2026 I built and submitted containers to the AIMS-TBI challenge: traumatic brain injury lesion detection and segmentation on T1-weighted MRI. The detection container reached **0.846 balanced accuracy** on the official test set (sensitivity 0.863, specificity 0.829) and placed 8th on the public final detection leaderboard (preliminary). The segmentation container reached **0.5048 Dice** on lesion-containing scans.
+In June and July 2026 I built and submitted containers to the AIMS-TBI challenge: traumatic brain injury lesion detection and segmentation on T1-weighted MRI. The detection container reached **0.846 balanced accuracy** on the official test set (sensitivity 0.863, specificity 0.829) and placed 8th on the final detection leaderboard (official ranking announced 1 October 2026). The segmentation container reached **0.5048 Dice** on lesion-containing scans.
 
 That's the last time I'll mention the result. It's here only so you know the rest of this is worth trusting.
 

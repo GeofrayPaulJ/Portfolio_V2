@@ -1,5 +1,8 @@
 // Posts questions to Alfred on a running dev server, prints each reply and checks it.
 // Usage: node scripts/test-alfred.mjs [baseUrl]   (default http://localhost:3000)
+import { readdirSync, readFileSync } from "fs";
+import { join } from "path";
+
 const BASE = process.argv[2] || "http://localhost:3000";
 const PAUSE_MS = 5000;
 
@@ -36,6 +39,15 @@ const QUESTIONS = [
     ],
   },
   {
+    q: "Where did he place in AIMS-TBI?",
+    checks: (reply) => [
+      (/8th/.test(reply) && /11th/.test(reply)) || "does not give 8th (detection) and 11th (segmentation)",
+      /1 October 2026/.test(reply) || "omits the status: official ranking announced 1 October 2026",
+      !/preliminary/i.test(reply) || "labels the AIMS-TBI result preliminary",
+      !EMPLOYER_TERMS.test(reply) || "mentions the employer in a challenge answer",
+    ],
+  },
+  {
     q: "Is he available for consulting?",
     checks: (reply) => [
       reply.includes(DEFLECTION) || "does not use the standard deflection",
@@ -44,10 +56,22 @@ const QUESTIONS = [
   },
 ];
 
-const GLOBAL_CHECKS = (reply) => [
-  !/RTX|5060|\bT4\b/i.test(reply) || "names a GPU model",
-  !/\b(leading|winner|winning|first place|1st place)\b/i.test(reply) || "uses banned placement wording",
-];
+// Every number Alfred states must appear in the knowledge base (catches dropped digits such as 0.782 for 0.0782).
+const NUMBER = /\d+(?:[.,]\d+)*/g;
+const KNOWN_NUMBERS = new Set(
+  readdirSync("corpus")
+    .filter((f) => f.endsWith(".md"))
+    .flatMap((f) => readFileSync(join("corpus", f), "utf-8").match(NUMBER) ?? [])
+);
+
+const GLOBAL_CHECKS = (reply, prose) => {
+  const unknown = [...new Set(prose.match(NUMBER) ?? [])].filter((n) => !KNOWN_NUMBERS.has(n));
+  return [
+    !/RTX|5060|\bT4\b/i.test(reply) || "names a GPU model",
+    !/\b(leading|winner|winning|first place|1st place)\b/i.test(reply) || "uses banned placement wording",
+    !unknown.length || `states numbers not in the knowledge base: ${unknown.join(", ")}`,
+  ];
+};
 
 function sentences(prose) {
   return prose
@@ -79,7 +103,8 @@ function splitChips(text) {
   const lines = text.split("\n");
   const last = lines.pop().trim();
   try {
-    const chips = JSON.parse(last);
+    let chips = JSON.parse(last);
+    if (Array.isArray(chips) && chips.length === 1 && Array.isArray(chips[0])) chips = chips[0];
     if (Array.isArray(chips) && chips.length === 2 && chips.every((c) => typeof c === "string")) {
       return { prose: lines.join("\n").trim(), chips };
     }
@@ -100,7 +125,7 @@ for (const [i, { q, checks }] of QUESTIONS.entries()) {
     const problems = [
       chips ? true : "final line is not a two-item JSON array",
       !reply.includes(FALLBACK_MARKER) || "upstream fallback was served",
-      ...GLOBAL_CHECKS(reply),
+      ...GLOBAL_CHECKS(reply, prose),
       ...checks(reply, prose),
     ].filter((r) => r !== true);
     console.log(problems.length ? `--- FAIL: ${problems.join("; ")}` : "--- PASS");
