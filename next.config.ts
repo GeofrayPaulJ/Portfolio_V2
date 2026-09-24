@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  // Alfred's route reads corpus/*.md from disk at runtime; tracing can't see a directory read.
+  outputFileTracingIncludes: {
+    "/api/alfred-cs": ["./corpus/**/*.md"],
+  },
 };
 
 export default nextConfig;

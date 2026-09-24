@@ -30,7 +30,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (NEVER commit — contains RESEND_API_KEY, GROQ_API_KEY, Supabase keys)
+# env files (NEVER commit — they hold API keys)
 .env*
 !.env.example
 

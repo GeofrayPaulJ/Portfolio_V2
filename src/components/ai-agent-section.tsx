@@ -191,8 +191,8 @@ export default function AiAgentSection() {
             Meet Alfred
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mt-4 text-lg">
-            A RAG-powered assistant with real-time access to my project
-            documentation, case studies, and technical stack. Ask it anything.
+            An assistant that reads a curated knowledge base of my work in full
+            on every question and answers with Gemini. Ask it anything.
           </p>
         </motion.div>
 
@@ -212,7 +212,7 @@ export default function AiAgentSection() {
                 <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-muted-foreground/30" />
               </div>
               <span className="text-[10px] md:text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
-                Alfred // RAG Engine Online
+                Alfred // Gemini, full context
               </span>
             </div>
             <div className="flex items-center gap-1.5 md:gap-2">
