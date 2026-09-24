@@ -6,6 +6,8 @@ import { Download, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { challenges } from "@/lib/challenges-meta";
+import { publications } from "@/lib/publications";
+import { skills } from "@/lib/skills";
 
 export default function ResumePage() {
   return (
@@ -85,7 +87,7 @@ export default function ResumePage() {
         >
           <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-6">Profile</h2>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            AI Engineer based at the Sudha Gopalakrishnan Brain Centre (IIT Madras), specialising in production-grade deep learning systems for medical imaging. Focused on building reliable, end-to-end infrastructure, from segmentation architectures and GPU-optimised training loops to scalable clinical inference backends. Experienced in translating raw wet-lab data into clinical-grade models.
+            AI engineer in medical imaging: segmentation and classification models, computational pathology and neuroimaging pipelines, and the infrastructure that trains and serves them. Entered four MICCAI 2026 challenges as an independent researcher.
           </p>
         </motion.section>
 
@@ -105,7 +107,6 @@ export default function ResumePage() {
                   <div className="absolute w-3 h-3 bg-sky-500 rounded-full -left-[6.5px] top-1.5 shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="text-xl font-bold">Junior AI Engineer</h3>
-                    <span className="text-sm font-mono text-muted-foreground">2025 to Present</span>
                   </div>
                   <p className="text-sky-500 font-medium mb-6 text-sm uppercase tracking-wider">Sudha Gopalakrishnan Brain Centre, IIT Madras</p>
                   
@@ -114,7 +115,7 @@ export default function ResumePage() {
                     <div>
                       <h4 className="text-xs font-bold uppercase text-zinc-400 mb-4 tracking-widest border-b border-border/50 pb-2">Model Evaluation, Benchmarking & Failure Diagnosis</h4>
                       <ul className="space-y-4 text-muted-foreground list-disc pl-4">
-                        <li><strong>HookNet Grey/White Matter Segmentation:</strong> H&E, multi-slide pooled training reaching Dice 0.84 / 0.75 / 0.85 (background / white matter / grey matter). Diagnosed a stagnant boundary metric (NSD@10 = 0.056) to a coarse 547-vertex ground-truth polygon rather than a model or metric defect, confirmed via a per-class tau-sweep control test — redirected the team toward re-annotation instead of further training spend.</li>
+                        <li><strong>HookNet Grey/White Matter Segmentation:</strong> Multiple sclerosis whole-slide images (H&E), multi-slide pooled training. Diagnosed a stagnant boundary metric to a coarse ground-truth polygon rather than a model or metric defect, confirmed via a per-class tau-sweep control test — redirected the team toward re-annotation instead of further training spend.</li>
                       </ul>
                     </div>
 
@@ -123,8 +124,10 @@ export default function ResumePage() {
                       <h4 className="text-xs font-bold uppercase text-zinc-400 mb-4 tracking-widest border-b border-border/50 pb-2">Computational Pathology & Radiology Pipelines</h4>
                       <ul className="space-y-4 text-muted-foreground list-disc pl-4">
                         <li><strong>CD34 Microvessel Segmentation:</strong> nnU-Net v2 pipeline automating density quantification across gigapixel whole-slide images; eliminated tile-boundary artefacts via overlap-averaged inference.</li>
-                        <li><strong>IHC Analysis Platform:</strong> Multi-marker inference backend (CD68, CD34, astrocyte, beta-amyloid quantification) behind a single React + Django + Celery interface; resolved container-crash failures under 150GB+ TIFF workloads.</li>
-                        <li><strong>MRI Preprocessing Pipeline:</strong> Four-phase, hardware-agnostic pipeline (pydicom, ANTsPy, SimpleITK, MONAI) standardising raw post-mortem foetal MRI (SAG T1 MPRAGE, ASL) to 0.5mm³ isotropic, nnU-Net-ready volumes; built for zero-engineering-knowledge operation by end-user researchers.</li>
+                        <li><strong>IHC Analysis Platform:</strong> Multi-marker inference backend (CD68, CD34, astrocyte, beta-amyloid quantification) behind a single React + Django + Celery interface; resolved container-crash failures under large TIFF workloads.</li>
+                        <li><strong>Astrocyte Detection:</strong> Astrocyte detection web application (React and Django) deployed on a DGX A100.</li>
+                        <li><strong>Fetal Brain Skull-Stripping:</strong> Skull-stripping models for postmortem fetal brain MRI (nnU-Net and nnSAM). Found and fixed a silent orientation error that transposed predictions, and established the correct brain-boundary convention against a public fetal brain atlas.</li>
+                        <li><strong>MRI Preprocessing Pipeline:</strong> Four-phase, hardware-agnostic pipeline (pydicom, ANTsPy, SimpleITK, MONAI) standardising raw post-mortem foetal MRI (SAG T1 MPRAGE, ASL) to isotropic, nnU-Net-ready volumes; built for zero-engineering-knowledge operation by end-user researchers. Original author: the late Dr. Jaikishan Jayakumar.</li>
                       </ul>
                     </div>
 
@@ -135,6 +138,14 @@ export default function ResumePage() {
                         <li><strong>Cluster Optimisation:</strong> Profiled and tuned training loops on a DGX A100 cluster using NVIDIA Nsight Systems, AMP, and DDP.</li>
                         <li><strong>Neurological Asset Tracking System:</strong> Interviewed lab personnel to surface physical edge cases across the specimen lifecycle (sectioning, staining, QR-coded digital storage); architected the relational data model and ORM layer, built the tracking interface, and delivered BPMN/UML workflow diagrams to the CSO.</li>
                         <li><strong>Asynchronous Processing:</strong> Django, Celery, and Redis platforms for high-throughput, non-blocking inference.</li>
+                      </ul>
+                    </div>
+
+                    {/* Subsection 4 */}
+                    <div>
+                      <h4 className="text-xs font-bold uppercase text-zinc-400 mb-4 tracking-widest border-b border-border/50 pb-2">Web</h4>
+                      <ul className="space-y-4 text-muted-foreground list-disc pl-4">
+                        <li><strong>Institute Website:</strong> Built the institute&apos;s public website solo in React (sgbc.humanbrain.in) and the BRICS 2026 Neuroscience Symposium pages.</li>
                       </ul>
                     </div>
                   </div>
@@ -150,13 +161,30 @@ export default function ResumePage() {
               className="pt-8 border-t border-border/50"
             >
               <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-6">Publications</h2>
-              <div>
-                <h3 className="text-lg font-bold leading-snug">
-                  Diagnosing the Recall Tail: A Class-Imbalance Study of nnU-Net for Detection and Segmentation of Heterogeneous Moderate–Severe TBI Lesions
-                </h3>
-                <p className="text-sm text-muted-foreground mt-2">Geofray Paul J (sole author)</p>
-                <p className="text-sky-500 font-medium text-sm mt-1">Accepted, AIMS-TBI 2026 challenge paper, MICCAI 2026.</p>
-              </div>
+              <ul className="space-y-6">
+                {publications.map((pub) => (
+                  <li key={pub.title}>
+                    <p className="text-sm text-muted-foreground">{pub.authors}</p>
+                    <h3 className="text-lg font-bold leading-snug mt-1">{pub.title}</h3>
+                    <p className="text-sky-500 font-medium text-sm mt-1">{pub.venue}</p>
+                    {pub.links
+                      .filter((link) => !link.href.startsWith("/"))
+                      .map((link) => (
+                        <p key={link.href} className="text-sm text-muted-foreground mt-1">
+                          {link.label}:{" "}
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-sky-500 underline underline-offset-2"
+                          >
+                            {link.href.replace("https://", "")}
+                          </a>
+                        </p>
+                      ))}
+                  </li>
+                ))}
+              </ul>
             </motion.section>
 
             {/* Challenges */}
@@ -192,8 +220,8 @@ export default function ResumePage() {
             >
               <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-6">Education</h2>
               <div>
-                <h3 className="text-xl font-bold">B.Tech. Computer Science and Engineering</h3>
-                <p className="text-sky-500 font-medium">AI Specialisation | Karunya Institute of Technology and Sciences</p>
+                <h3 className="text-xl font-bold">B.Tech, Computer Science and Engineering (AI specialisation)</h3>
+                <p className="text-sky-500 font-medium">Karunya Institute of Technology and Sciences</p>
                 <p className="text-sm text-muted-foreground mt-1">2020 to 2024</p>
               </div>
             </motion.section>
@@ -201,65 +229,21 @@ export default function ResumePage() {
 
           {/* Sidebar Column */}
           <div className="space-y-16">
-            {/* Core Competencies */}
-            <motion.section 
+            {/* Skills */}
+            <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-8">Core Competencies</h2>
-              
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-[10px] font-bold uppercase text-zinc-500 mb-3 tracking-widest">Medical Imaging & Pathology</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {["nnU-Net V2", "U-Mamba", "WSI Analysis", "IHC Quantification", "DICOM/NIfTI", "MONAI", "ANTs", "SAM", "MedSAM", "UNI", "CONCH", "Foundation Models"].map(skill => (
-                      <span key={skill} className="px-2 py-1 bg-muted text-xs rounded border border-border">{skill}</span>
-                    ))}
+              <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-8">Skills</h2>
+              <dl className="space-y-5">
+                {skills.map((skill) => (
+                  <div key={skill.label}>
+                    <dt className="text-[10px] font-bold uppercase text-zinc-500 mb-1 tracking-widest">{skill.label}</dt>
+                    <dd className="text-sm text-muted-foreground leading-relaxed">{skill.text}</dd>
                   </div>
-                </div>
-
-                <div>
-                  <h3 className="text-[10px] font-bold uppercase text-zinc-500 mb-3 tracking-widest">High-Performance Infrastructure</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {["Docker", "Linux", "CUDA", "DGX A100", "Nsight Systems", "AMP", "DDP"].map(skill => (
-                      <span key={skill} className="px-2 py-1 bg-muted text-xs rounded border border-border">{skill}</span>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-[10px] font-bold uppercase text-zinc-500 mb-3 tracking-widest">Backend & Data Architecture</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {["Python", "Django REST", "Celery", "Redis", "Async Processing", "Relational Modeling", "BPMN"].map(skill => (
-                      <span key={skill} className="px-2 py-1 bg-muted text-xs rounded border border-border">{skill}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.section>
-
-            {/* Languages */}
-            <motion.section 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-8">Languages</h2>
-              <div className="space-y-4">
-                <div>
-                  <p className="font-bold text-sm">English</p>
-                  <p className="text-xs text-muted-foreground uppercase tracking-widest">Native / Professional</p>
-                </div>
-                <div>
-                  <p className="font-bold text-sm">Spanish</p>
-                  <p className="text-xs text-muted-foreground uppercase tracking-widest">A2 Level</p>
-                </div>
-                <div>
-                  <p className="font-bold text-sm">Tamil</p>
-                  <p className="text-xs text-muted-foreground uppercase tracking-widest">Native</p>
-                </div>
-              </div>
+                ))}
+              </dl>
             </motion.section>
           </div>
         </div>

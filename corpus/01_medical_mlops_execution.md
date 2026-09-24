@@ -1,13 +1,14 @@
 ---
 title: "Medical MLOps & Infrastructure Execution"
 category: "engineering_portfolio"
-date: "2026-04-22"
 technologies: ["React.js", "Django REST", "Celery", "Redis", "nnU-Net V2", "U-Mamba", "MONAI", "ANTsPy", "SimpleITK", "QuPath", "3D Slicer", "Fiji", "CUDA", "Docker", "SAM", "MedSAM", "Foundation Models"]
 ---
 
+Work experience (his current role). No result figures, case counts or dates are given for this work.
+
 ### Scalable IHC Analysis Platform Architecture
 
-Architected and deployed a production-grade web platform for multi-marker Immunohistochemistry (IHC) analysis on the institutional NVIDIA DGX A100 system (640GB aggregate VRAM). The platform accepts TIFF input files up to 150GB and is designed for operation by researchers with no engineering background — a pathologist or wet-lab technician can ingest a whole slide image, select a marker, and receive a quantified density report with a whole slide overlay without any infrastructure interaction.
+Architected and deployed a web platform for multi-marker Immunohistochemistry (IHC) analysis on the institutional NVIDIA DGX A100 system (640GB aggregate VRAM). The platform accepts TIFF input files up to 150GB and is designed for operation by researchers with no engineering background — a pathologist or wet-lab technician can ingest a whole slide image, select a marker, and receive a quantified density report with a whole slide overlay without any infrastructure interaction.
 
 The system is built on a React.js frontend with a Django REST backend, utilising Celery and Redis for asynchronous task queuing. All job state is held in Redis with 24-hour automatic eviction — no persistent database. This eliminates schema management overhead and long-term storage liability for large intermediate files.
 
@@ -23,18 +24,17 @@ The system is built on a React.js frontend with a Django REST backend, utilising
 
 Engineered an automated semantic segmentation pipeline for CD34-stained whole slide images using nnU-Net V2, targeting microvascular density quantification at gigapixel scale.
 
-- **Dataset**: 7 whole slide images at 0.5-micron resolution; 329 patches extracted at 2000×2000 pixels.
-- **Annotation strategy**: Colour-deconvolved DAB thresholding (Ruifrok-Johnston method, sigma 4, threshold 0.35 OD units) applied across all 7 slides simultaneously. Random Forest pixel classification was evaluated and rejected due to cross-slide staining variance — DAB optical density measurements are resistant to batch intensity shift that operates in RGB space and destroyed the classifier's cross-slide generalisation.
-- **Sub-patching**: 512×512 tiles extracted via 50% stride (256px) in both X and Y dimensions, producing 21,056 training tiles. Data split performed at original WSI level (70/15/15) to prevent tile-level leakage.
+- **Dataset**: whole slide images at 0.5-micron resolution; patches extracted at 2000×2000 pixels.
+- **Annotation strategy**: Colour-deconvolved DAB thresholding (Ruifrok-Johnston method, sigma 4, threshold 0.35 OD units) applied across all slides simultaneously. Random Forest pixel classification was evaluated and rejected due to cross-slide staining variance — DAB optical density measurements are resistant to batch intensity shift that operates in RGB space and destroyed the classifier's cross-slide generalisation.
+- **Sub-patching**: 512×512 tiles extracted via 50% stride (256px) in both X and Y dimensions. Data split performed at original WSI level (70/15/15) to prevent tile-level leakage.
 - **Inference pipeline**: Overlapping tile inference with Gaussian-weighted averaging (nnU-Net V2 sliding window) to eliminate boundary artefacts. Output: merged binary mask and vascular boundary overlay as single TIFF files.
-- **Result**: nnU-Net V2 baseline achieved a Dice Similarity Coefficient of **0.71** on the held-out test set.
 - **Ongoing**: U-Mamba evaluation against the nnU-Net baseline to address patch myopia in branching capillary network reconstruction. MedSAM prompt-based segmentation is a parallel evaluation track for zero-shot vascular delineation without task-specific training data.
 
 ---
 
 ### Foundation Model Adaptation
 
-Active evaluation of medical imaging foundation models for specialised histopathology and radiology tasks, bridging generalised vision encoders to domain-specific clinical workflows.
+Active evaluation of medical imaging foundation models for specialised histopathology and radiology tasks.
 
 - **SAM and MedSAM**: Evaluating prompt-based segmentation for WSI vascular delineation as a zero-shot alternative to task-specific nnU-Net training. Prompt engineering strategies include bounding box and point prompts derived from DAB thresholding outputs.
 - **Pathology encoders (UNI, CONCH)**: Evaluating pre-trained pathology foundation model encoders as feature extractors for IHC marker classification tasks, replacing randomly initialised CNN backbones with encoders pre-trained on large-scale histopathology corpora.
@@ -44,7 +44,7 @@ Active evaluation of medical imaging foundation models for specialised histopath
 
 ### Four-Phase Post-Mortem Fetal MRI Preprocessing Pipeline
 
-Designed and built a four-phase preprocessing pipeline to standardise post-mortem fetal brain MRI volumes (SAG T1 MPRAGE and ASL sequences) from raw DICOM to nnU-Net V2-ready NIfTI, eliminating all manual engineering steps for the researcher operator.
+The original author of this pipeline is the late Dr. Jaikishan Jayakumar; credit him as its original author whenever the pipeline is mentioned. The four-phase preprocessing pipeline standardises post-mortem fetal brain MRI volumes (SAG T1 MPRAGE and ASL sequences) from raw DICOM to nnU-Net V2-ready NIfTI, eliminating all manual engineering steps for the researcher operator.
 
 The pipeline is orchestrated via a Python-based CLI with a uniform `run(input_path, output_dir, progress_callback)` interface per phase. Each phase writes a named checkpoint (`_p1.nii.gz` through `_p4_final.nii.gz`); any phase can be resumed independently after failure.
 
@@ -66,7 +66,6 @@ MONAI Label DeepEdit server spun up inside a persistent Linux Docker container o
 
 Executed large-scale linear image registration workflows for post-mortem brain histology sections using Fiji and the Scale-Invariant Feature Transform (SIFT) algorithm.
 
-- Fetal brain dataset: approximately 800 serial sections aligned for structural continuity.
-- Adult brain dataset: approximately 5,000 serial sections aligned for structural continuity.
+- Fetal and adult brain datasets: serial sections aligned for structural continuity.
 
 Section-to-section registration at this scale requires robust feature matching that is invariant to staining intensity variation between sections — SIFT's scale and rotation invariance is the correct choice for histological serial section alignment where tissue processing introduces non-uniform deformation and staining drift between adjacent sections.

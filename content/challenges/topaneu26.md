@@ -8,15 +8,15 @@
 
 Task 2 final test phase: 10th, mean position 10.0 across seven metrics. Team Prometheus, solo entrant.
 
-| Metric | Value | Position |
-|---|---|---|
-| Dice | 0.1521 | 12th |
-| Precision | 0.4367 | 7th |
-| F1 | 0.3110 | 9th |
-| Recall | 0.3499 | 12th |
-| MCC | 0.4435 | 7th |
-| VolSim | 0.1699 | 12th |
-| HD95 | 226.7214 | 11th |
+| Metric | Value |
+|---|---|
+| Dice | 0.1521 |
+| Precision | 0.4367 |
+| F1 | 0.3110 |
+| Recall | 0.3499 |
+| MCC | 0.4435 |
+| VolSim | 0.1699 |
+| HD95 | 226.7214 |
 
 Task 1: pending. The organisers populate Task 1 from the Task 2 submission, and that fusion is in progress. This entry is not a publication.
 

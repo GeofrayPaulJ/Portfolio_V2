@@ -14,11 +14,12 @@ interface Message {
 const INITIAL_MESSAGE: Message = {
   role: "alfred",
   content:
-    "Hello. I'm Alfred, Geofray's technical assistant. I can take you through his engineering work, his MICCAI 2026 challenge entries and his technical notes. What would you like to know?",
+    "Hello. I'm Alfred, Geofray's technical assistant. I can take you through his engineering work, his MICCAI 2026 challenge entries, his technical notes and what he is building now. What would you like to know?",
 };
 
 const DEFAULT_SUGGESTIONS = [
   "What did the AIMS-TBI paper find?",
+  "What is he building now?",
 ];
 
 export default function AiAgentSection() {

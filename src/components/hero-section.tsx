@@ -69,8 +69,9 @@ export default function HeroSection() {
 
             {/* Paragraph (Refined Copy) */}
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              Building production grade deep learning pipelines for terabyte scale 
-Computational Pathology and Radiology workflows.
+              Medical image segmentation and classification, computational
+              pathology and neuroimaging, and the infrastructure that trains
+              and serves the models.
             </p>
 
             {/* Capability Tags (Single-line separator style) */}
@@ -91,10 +92,10 @@ Computational Pathology and Radiology workflows.
             <div className="flex flex-col sm:flex-row gap-4 pt-4 md:pt-6">
               <Button
                 size="lg"
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('challenges')?.scrollIntoView({ behavior: 'smooth' })}
                 className="bg-sky-500 text-white hover:bg-sky-600 px-8 h-12 rounded-lg font-semibold transition-all duration-300 border-none w-full sm:w-auto"
               >
-                Explore Projects
+                View Challenges
               </Button>
               <Button
                 variant="outline"
@@ -141,7 +142,7 @@ Computational Pathology and Radiology workflows.
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 cursor-pointer opacity-40 hover:opacity-100 transition-opacity"
-        onClick={() => document.getElementById("expertise")?.scrollIntoView({ behavior: "smooth" })}
+        onClick={() => document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" })}
       >
         <ChevronDown className="w-6 h-6 animate-bounce" />
       </motion.div>

@@ -5,10 +5,11 @@ import { useState, useEffect } from "react";
 
 
 const navLinks = [
-  { label: "Expertise", href: "#expertise" },
-  { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
   { label: "Challenges", href: "#challenges" },
+  { label: "Publications", href: "#publications" },
   { label: "Technical Notes", href: "#documentation" },
+  { label: "Projects", href: "#projects" },
   { label: "Alfred AI", href: "#ai-agent" },
   { label: "Resume", href: "/resume" },
 ];
@@ -42,7 +43,7 @@ export default function Footer() {
               Geofray Paul J
             </Link>
             <p className="text-sm text-muted-foreground dark:text-white/55 leading-relaxed max-w-xs">
-              Engineering high performance deep learning architectures for computational pathology and radiology.
+              Medical image segmentation and classification, computational pathology and neuroimaging.
             </p>
           </div>
 

@@ -6,7 +6,7 @@
 
 ## Context
 
-Ground truth mask generation for CD34-stained whole slide images required a decision between two annotation strategies: a Random Forest pixel classifier and a colour-deconvolved DAB thresholding approach. The pipeline needed binary masks for 329 patches (2000×2000px) extracted from 7 WSIs stained across separate batches, with sufficient quality to serve as training labels for a downstream nnU-Net V2 model. Systematic bias introduced at this stage propagates directly into clinical inference.
+Ground truth mask generation for CD34-stained whole slide images required a decision between two annotation strategies: a Random Forest pixel classifier and a colour-deconvolved DAB thresholding approach. The pipeline needed binary masks for 329 patches (2000×2000px) extracted from 7 WSIs stained across separate batches, with sufficient quality to serve as training labels for a downstream nnU-Net V2 model. Systematic bias introduced at this stage propagates directly into inference.
 
 ---
 

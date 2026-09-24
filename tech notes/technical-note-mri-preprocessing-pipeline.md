@@ -2,6 +2,8 @@
 
 **Date:** May 2026 · **8 min read** · `Computational Radiology` `MRI` `ANTsPy` `SimpleITK` `MONAI`
 
+The late Dr. Jaikishan Jayakumar was the original author of this pipeline.
+
 ---
 
 ## Context

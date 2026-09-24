@@ -49,7 +49,7 @@ export const notes: NoteMetadata[] = [
     tags: ["Computational Radiology", "MRI", "ANTsPy"],
     readTime: "8 min",
     description:
-      "How pydicom, ANTsPy, SimpleITK, MONAI Label, and 3D Slicer are orchestrated into a researcher-facing pipeline that requires zero engineering knowledge to operate.",
+      "How pydicom, ANTsPy, SimpleITK, MONAI Label, and 3D Slicer are orchestrated into a researcher-facing pipeline that requires zero engineering knowledge to operate. Original author: the late Dr. Jaikishan Jayakumar.",
     slug: "mri-preprocessing-pipeline",
     filename: "technical-note-mri-preprocessing-pipeline.md",
   },

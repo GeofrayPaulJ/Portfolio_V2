@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Geofray Paul J, AI Engineer",
     description:
-      "AI Engineer specialising in medical imaging and MLOps. Building production-ready deep learning systems.",
+      "AI Engineer specialising in medical imaging and MLOps.",
     type: "website",
     locale: "en_US",
   },

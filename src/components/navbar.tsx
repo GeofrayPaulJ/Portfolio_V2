@@ -10,10 +10,11 @@ import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
-  { label: 'Expertise', href: '#expertise' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
   { label: 'Challenges', href: '#challenges' },
+  { label: 'Publications', href: '#publications' },
   { label: 'Technical Notes', href: '#documentation' },
+  { label: 'Projects', href: '#projects' },
   { label: 'Alfred AI', href: '#ai-agent' },
   { label: 'Resume', href: '/resume' },
 ];
@@ -123,7 +124,7 @@ export default function Navbar() {
             {/* Logo */}
             <button
               onClick={() => handleNavClick('#hero')}
-              className="relative text-xl md:text-2xl font-bold text-foreground hover:text-primary transition-colors tracking-tight group"
+              className="relative whitespace-nowrap text-xl md:text-2xl font-bold text-foreground hover:text-primary transition-colors tracking-tight group"
             >
               Geofray Paul J
               <span
@@ -141,7 +142,7 @@ export default function Navbar() {
                 <button
                   key={item.label}
                   onClick={() => handleNavClick(item.href)}
-                  className="relative px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors group"
+                  className="relative whitespace-nowrap px-2.5 xl:px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors group"
                 >
                   {item.label}
                   <span
