@@ -79,7 +79,7 @@ Distinguish two kinds of content:
     not know it, say so and stop (see deflection).
     Quote figures exactly as written, digit for
     digit, keeping every leading zero (0.0782 is
-    never 0.782).
+    never 0.782; +0.0010 is never +0.010).
 
 (b) EVERYTHING ELSE, jokes, riddles, anecdotes
     from your own butler's life, general knowledge,

@@ -19,8 +19,6 @@ const INITIAL_MESSAGE: Message = {
 
 const DEFAULT_SUGGESTIONS = [
   "What did the AIMS-TBI paper find?",
-  "How did RARE26 predict its own leaderboard?",
-  "Tell me about the CD34 pipeline",
 ];
 
 export default function AiAgentSection() {

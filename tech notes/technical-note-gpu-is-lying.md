@@ -2,15 +2,15 @@
 
 ### And so is your test harness, your docstring, your validation set, and your cross-validation.
 
-*Notes from building and submitting containers to a MICCAI 2026 challenge.*
+**Geofray Paul J**
 
-*Submission to the MICCAI Educational Challenge 2026 (finalist). AI assistance disclosure at the end.*
+MICCAI Educational Challenge 2026 (finalist)
 
 ---
 
 ## The tutorial I meant to write
 
-In June and July 2026 I built and submitted containers to the AIMS-TBI challenge: traumatic brain injury lesion detection and segmentation on T1-weighted MRI. The detection container reached **0.846 balanced accuracy** on the official test set (sensitivity 0.863, specificity 0.829) and placed 8th on the final detection leaderboard (official ranking announced 1 October 2026). The segmentation container reached **0.5048 Dice** on lesion-containing scans.
+In June and July 2026 I built and submitted containers to the AIMS-TBI challenge: traumatic brain injury lesion detection and segmentation on T1-weighted MRI. The detection container reached **0.846 balanced accuracy** on the official test set (sensitivity 0.863, specificity 0.829) and placed 8th on the final detection leaderboard; 11th on segmentation (official ranking announced 1 October 2026). The segmentation container reached **0.5048 Dice** on lesion-containing scans.
 
 That's the last time I'll mention the result. It's here only so you know the rest of this is worth trusting.
 
@@ -191,7 +191,7 @@ A swing of 0.571 Dice on an identical prediction, decided by one comparison oper
 
 ## 5. Your calibration is lying to you
 
-Detection worked by segmenting, then thresholding on the predicted lesion volume: any case with more than τ foreground voxels is positive. I calibrated τ on held-out data, where the sweep was unambiguous. **τ* = 50 was worth +0.027 balanced accuracy** over the τ = 100 I'd deployed.
+Detection worked by segmenting, then thresholding on the predicted lesion volume: any case with more than τ foreground voxels is positive. I calibrated τ on held-out data, where the sweep was unambiguous. **τ\* = 50 was worth +0.027 balanced accuracy** over the τ = 100 I'd deployed.
 
 The reasoning behind that optimum was that specificity had saturated at **0.958**, so the only remaining gains were in sensitivity, and lowering the threshold buys sensitivity.
 
@@ -294,7 +294,7 @@ The correction is trivial, and I'll offer it as the last item on the checklist. 
 
 ## Repository
 
-Repository: to be published.
+**MEC**: https://github.com/GeofrayPaulJ/MEC, device probe, synthetic fixture generator, container contract test, pinned dependencies, CI. No weights, no GPU, no data agreement required.
 
 ## AI assistance disclosure
 

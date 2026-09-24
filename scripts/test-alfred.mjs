@@ -19,7 +19,16 @@ const answersChallenge = (reply) => [
 const QUESTIONS = [
   { q: "hello", checks: () => [] },
   { q: "What did the AIMS-TBI paper find?", checks: answersChallenge },
-  { q: "How did RARE26 predict its own leaderboard?", checks: answersChallenge },
+  {
+    q: "How did RARE26 predict its own leaderboard?",
+    checks: (reply) => [
+      ...answersChallenge(reply),
+      (/0\.0252/.test(reply) && /0\.0333/.test(reply)) || "omits the leave-one-centre-out projection (0.0252 and 0.0333)",
+      /0\.0782/.test(reply) || "omits the pooled projection (0.0782) the finding is compared against",
+      !/acceptance statistic|screening|uncalibrated/i.test(reply) ||
+        "ties the uncalibrated component-screening statistic to the projection",
+    ],
+  },
   { q: "What limited the TopAneu pipeline?", checks: answersChallenge },
   {
     q: "What GPU did he use?",

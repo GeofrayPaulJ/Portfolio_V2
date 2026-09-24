@@ -6,8 +6,8 @@ import { extractChips } from "@/lib/chips";
 const MODEL = process.env.ALFRED_MODEL || "gemini-3.5-flash-lite";
 const HISTORY_TURNS = 8;
 const MAX_MESSAGE_CHARS = 2000;
-// Thinking tokens count toward this cap: a ~120-word reply plus the chip line, with headroom.
-const MAX_OUTPUT_TOKENS = 600;
+// Thinking tokens count toward this cap: LOW thinking plus a ~120-word reply and the chip line.
+const MAX_OUTPUT_TOKENS = 1500;
 const UPSTREAM_TIMEOUT_MS = 25000;
 const RETRY_DELAY_MS = 1000;
 
@@ -77,9 +77,9 @@ export async function POST(req: NextRequest) {
             contents,
             config: {
               systemInstruction: systemInstruction!,
-              temperature: 0.3,
+              temperature: 0.1,
               maxOutputTokens: MAX_OUTPUT_TOKENS,
-              thinkingConfig: { thinkingLevel: ThinkingLevel.MINIMAL },
+              thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
               httpOptions: { timeout: UPSTREAM_TIMEOUT_MS },
             },
           });
