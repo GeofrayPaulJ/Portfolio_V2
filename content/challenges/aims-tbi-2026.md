@@ -52,6 +52,10 @@ Median inference is about 35 s per case on the organisers' evaluation GPU, again
 - The batch-Dice result comes from a single fold.
 - Diffusion data went unused, because the test set is T1-weighted only.
 
+## Data acknowledgement
+
+The data were provided through the AIMS-TBI 2026 Challenge and shared via the ENIGMA Brain Injury working group. The author thanks the challenge organisers at the University of Utah, the ENIGMA Brain Injury consortium and the contributing sites, and confirms the data were used solely for the challenge in accordance with the signed data use agreement.
+
 ## Links
 
 - [AIMS-TBI 2026 challenge page](https://aims-tbi26.grand-challenge.org/)
