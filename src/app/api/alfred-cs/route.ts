@@ -10,6 +10,8 @@ const MAX_MESSAGE_CHARS = 2000;
 const MAX_OUTPUT_TOKENS = 1500;
 // Measured from the start of the request (including the one 503 retry) to the first streamed text.
 const FIRST_TOKEN_TIMEOUT_MS = 12000;
+// After the first text, the longest gap allowed between streamed chunks before the answer is cut off.
+const STALL_TIMEOUT_MS = 10000;
 const RETRY_DELAY_MS = 1000;
 
 const FALLBACK_TEXT =
@@ -67,8 +69,8 @@ export async function POST(req: NextRequest) {
       const send = (text: string) =>
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`));
       let full = "";
-      const firstToken = new AbortController();
-      const firstTokenTimer = setTimeout(() => firstToken.abort(), FIRST_TOKEN_TIMEOUT_MS);
+      const upstream = new AbortController();
+      let upstreamTimer = setTimeout(() => upstream.abort(), FIRST_TOKEN_TIMEOUT_MS);
 
       try {
         client ??= new GoogleGenAI({ apiKey: process.env.GOOGLE_AI_API_KEY });
@@ -83,7 +85,7 @@ export async function POST(req: NextRequest) {
               temperature: 0.1,
               maxOutputTokens: MAX_OUTPUT_TOKENS,
               thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
-              abortSignal: firstToken.signal,
+              abortSignal: upstream.signal,
             },
           });
 
@@ -100,7 +102,8 @@ export async function POST(req: NextRequest) {
         for await (const chunk of response) {
           const text = chunk.text;
           if (text) {
-            clearTimeout(firstTokenTimer);
+            clearTimeout(upstreamTimer);
+            upstreamTimer = setTimeout(() => upstream.abort(), STALL_TIMEOUT_MS);
             full += text;
             send(text);
           }
@@ -108,13 +111,15 @@ export async function POST(req: NextRequest) {
 
         if (!extractChips(full).chips.length) send(`\n${JSON.stringify(FALLBACK_CHIPS)}`);
       } catch (err) {
-        const reason = firstToken.signal.aborted
-          ? `no first token within ${FIRST_TOKEN_TIMEOUT_MS} ms`
-          : describeError(err);
+        const reason = !upstream.signal.aborted
+          ? describeError(err)
+          : full
+            ? `stream stalled for ${STALL_TIMEOUT_MS} ms`
+            : `no first token within ${FIRST_TOKEN_TIMEOUT_MS} ms`;
         console.error("Alfred upstream error:", reason);
         send(`${full ? "\n\n" : ""}${FALLBACK_TEXT}\n${JSON.stringify(FALLBACK_CHIPS)}`);
       } finally {
-        clearTimeout(firstTokenTimer);
+        clearTimeout(upstreamTimer);
       }
 
       controller.enqueue(encoder.encode("data: [DONE]\n\n"));

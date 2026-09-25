@@ -10,7 +10,7 @@ const DEFLECTION = "falls outside what I've been briefed on";
 const FALLBACK_MARKER = "The line to Mr. Paul's archive is engaged";
 const CHALLENGE_TERMS = /challenge|MICCAI|AIMS-TBI|RARE26|TopAneu|Educational|leaderboard/i;
 const EMPLOYER_TERMS = /SGBC|Sudha|Gopalakrishnan|IIT/i;
-const BEING_BUILT = /being built|currently building|still building|in progress|under construction|is building|building|developing|in development/i;
+const BEING_BUILT = /being built|currently building|still building|in progress|under construction|is building|building|developing|in development|constructing|under way|underway/i;
 // A claim that the project itself is done; "has completed the backend" or "yet to be completed" is not one.
 const FINISHED =
   /\b(Mnemosyne|ARBITER|it|the (system|project|app|benchmark)) (is|has been|was) (now )?(finished|complete|completed|launched|released|done|fully built)\b/i;
