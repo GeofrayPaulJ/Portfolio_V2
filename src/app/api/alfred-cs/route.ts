@@ -8,7 +8,8 @@ const HISTORY_TURNS = 8;
 const MAX_MESSAGE_CHARS = 2000;
 // Thinking tokens count toward this cap: LOW thinking plus a ~120-word reply and the chip line.
 const MAX_OUTPUT_TOKENS = 1500;
-const UPSTREAM_TIMEOUT_MS = 25000;
+// Measured from the start of the request (including the one 503 retry) to the first streamed text.
+const FIRST_TOKEN_TIMEOUT_MS = 12000;
 const RETRY_DELAY_MS = 1000;
 
 const FALLBACK_TEXT =
@@ -66,6 +67,8 @@ export async function POST(req: NextRequest) {
       const send = (text: string) =>
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`));
       let full = "";
+      const firstToken = new AbortController();
+      const firstTokenTimer = setTimeout(() => firstToken.abort(), FIRST_TOKEN_TIMEOUT_MS);
 
       try {
         client ??= new GoogleGenAI({ apiKey: process.env.GOOGLE_AI_API_KEY });
@@ -80,7 +83,7 @@ export async function POST(req: NextRequest) {
               temperature: 0.1,
               maxOutputTokens: MAX_OUTPUT_TOKENS,
               thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
-              httpOptions: { timeout: UPSTREAM_TIMEOUT_MS },
+              abortSignal: firstToken.signal,
             },
           });
 
@@ -97,6 +100,7 @@ export async function POST(req: NextRequest) {
         for await (const chunk of response) {
           const text = chunk.text;
           if (text) {
+            clearTimeout(firstTokenTimer);
             full += text;
             send(text);
           }
@@ -104,8 +108,13 @@ export async function POST(req: NextRequest) {
 
         if (!extractChips(full).chips.length) send(`\n${JSON.stringify(FALLBACK_CHIPS)}`);
       } catch (err) {
-        console.error("Alfred upstream error:", describeError(err));
+        const reason = firstToken.signal.aborted
+          ? `no first token within ${FIRST_TOKEN_TIMEOUT_MS} ms`
+          : describeError(err);
+        console.error("Alfred upstream error:", reason);
         send(`${full ? "\n\n" : ""}${FALLBACK_TEXT}\n${JSON.stringify(FALLBACK_CHIPS)}`);
+      } finally {
+        clearTimeout(firstTokenTimer);
       }
 
       controller.enqueue(encoder.encode("data: [DONE]\n\n"));
