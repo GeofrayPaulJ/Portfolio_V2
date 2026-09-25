@@ -16,7 +16,7 @@ export interface PersonalProject {
   // Extra labelled lines shown between the summary and "Built"
   details?: ProjectDetail[];
   built?: string;
-  next: string;
+  next?: string;
   links: ProjectLink[];
 }
 
@@ -53,14 +53,13 @@ export const personalProjects: PersonalProject[] = [
     links: [],
   },
   {
-    name: "GHOST",
+    name: "Mente Gris",
     tagline: "Offline habit tracker for Android",
-    status: "Currently building",
+    status: "Completed",
     summary:
       "A habit-tracking app with levels, streaks and reminders that runs entirely on the device. Access is protected by biometric login or a salted, hashed PIN, and the release build has no network permission.",
     built:
       "Expo and strict TypeScript; type checks, unit tests and the production bundle pass.",
-    next: "APK packaging.",
     links: [],
   },
 ];

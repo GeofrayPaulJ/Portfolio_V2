@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const navItems = [
   { label: 'Skills', href: '#skills' },
   { label: 'Challenges', href: '#challenges' },
-  { label: 'Publications', href: '#publications' },
+  { label: 'Papers', href: '#papers' },
   { label: 'Technical Notes', href: '#documentation' },
   { label: 'Projects', href: '#projects' },
   { label: 'Alfred AI', href: '#ai-agent' },

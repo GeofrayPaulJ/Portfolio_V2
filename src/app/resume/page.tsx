@@ -125,9 +125,7 @@ export default function ResumePage() {
                       <ul className="space-y-4 text-muted-foreground list-disc pl-4">
                         <li><strong>CD34 Microvessel Segmentation:</strong> nnU-Net v2 pipeline automating density quantification across gigapixel whole-slide images; eliminated tile-boundary artefacts via overlap-averaged inference.</li>
                         <li><strong>IHC Analysis Platform:</strong> Multi-marker inference backend (CD68, CD34 and astrocyte; beta-amyloid planned) behind a single React + Django + Celery interface; resolved container-crash failures under large TIFF workloads.</li>
-                        <li><strong>Astrocyte Detection:</strong> Astrocyte detection web application (React and Django) deployed on a DGX A100.</li>
-                        <li><strong>Fetal Brain Skull-Stripping:</strong> Skull-stripping models for postmortem fetal brain MRI (nnU-Net and nnSAM). Found and fixed a silent orientation error that transposed predictions, and established the correct brain-boundary convention against a public fetal brain atlas.</li>
-                        <li><strong>MRI Preprocessing Pipeline:</strong> Four-phase, hardware-agnostic pipeline (pydicom, ANTsPy, SimpleITK, MONAI) standardising raw post-mortem foetal MRI (SAG T1 MPRAGE, ASL) to isotropic, nnU-Net-ready volumes; built for zero-engineering-knowledge operation by end-user researchers. Original author: the late Dr. Jaikishan Jayakumar.</li>
+                        <li><strong>Fetal Brain Skull-Stripping:</strong> Skull-stripping models for postmortem fetal brain MRI (nnU-Net and nnSAM). Found and fixed a silent orientation error that transposed predictions, and established the correct brain-boundary convention against a public fetal brain atlas. The model was nnU-Net, trained on masks including CSF, with one fold fine-tuned on corrected masks.</li>
                       </ul>
                     </div>
 
@@ -153,14 +151,14 @@ export default function ResumePage() {
               </div>
             </motion.section>
 
-            {/* Publications */}
+            {/* Papers and Reports */}
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               className="pt-8 border-t border-border/50"
             >
-              <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-6">Publications</h2>
+              <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-6">Papers and Reports</h2>
               <ul className="space-y-6">
                 {publications.map((pub) => (
                   <li key={pub.title}>

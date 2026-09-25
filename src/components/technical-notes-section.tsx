@@ -35,7 +35,7 @@ export default function TechnicalNotesSection() {
           </h2>
           <p className="text-muted-foreground mt-3 max-w-2xl text-[15px] leading-relaxed">
             Engineering decisions, architectural trade-offs, and field
-            observations from active production pipelines.
+            observations from active research pipelines.
           </p>
         </motion.div>
 

@@ -58,9 +58,11 @@ export default function ProjectsSection() {
                       <span className="font-semibold text-foreground">Built:</span> {project.built}
                     </p>
                   )}
-                  <p className="text-muted-foreground">
-                    <span className="font-semibold text-foreground">Next:</span> {project.next}
-                  </p>
+                  {project.next && (
+                    <p className="text-muted-foreground">
+                      <span className="font-semibold text-foreground">Next:</span> {project.next}
+                    </p>
+                  )}
                   {project.links.length > 0 && (
                     <div className="flex flex-wrap gap-x-5 gap-y-1 pt-1">
                       {project.links.map((link) => (

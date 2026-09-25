@@ -10,7 +10,7 @@ const DEFLECTION = "falls outside what I've been briefed on";
 const FALLBACK_MARKER = "The line to Mr. Paul's archive is engaged";
 const CHALLENGE_TERMS = /challenge|MICCAI|AIMS-TBI|RARE26|TopAneu|Educational|leaderboard/i;
 const EMPLOYER_TERMS = /SGBC|Sudha|Gopalakrishnan|IIT/i;
-const BEING_BUILT = /being built|currently building|still building|in progress|under construction|is building|building/i;
+const BEING_BUILT = /being built|currently building|still building|in progress|under construction|is building|building|developing|in development/i;
 // A claim that the project itself is done; "has completed the backend" or "yet to be completed" is not one.
 const FINISHED =
   /\b(Mnemosyne|ARBITER|it|the (system|project|app|benchmark)) (is|has been|was) (now )?(finished|complete|completed|launched|released|done|fully built)\b/i;
@@ -80,9 +80,10 @@ const QUESTIONS = [
   {
     q: "Does he play an instrument?",
     checks: (reply, prose) => [
+      /keyboard/i.test(reply) || "does not mention the keyboard",
+      /upper[- ]intermediate/i.test(reply) || "does not say upper intermediate",
       /violin/i.test(reply) || "does not mention the violin",
       /beginner/i.test(reply) || "does not say beginner",
-      /A and D major/i.test(reply) || "does not mention A and D major scales",
       !/orchestra|concert|perform|\bgrade\b|years?\b|piano|guitar|lessons|teacher/i.test(prose) ||
         "adds detail beyond the knowledge base",
     ],
@@ -98,9 +99,14 @@ const QUESTIONS = [
     ],
   },
   {
-    q: "Tell me about the fetal MRI preprocessing pipeline.",
-    checks: (reply) => [
-      /Jaikishan Jayakumar/.test(reply) || "does not credit the late Dr. Jaikishan Jayakumar as original author",
+    q: "What is he building now?",
+    checks: (reply, prose) => [
+      (/Mnemosyne/.test(prose) && /ARBITER/.test(prose)) || "does not name Mnemosyne and ARBITER",
+      BEING_BUILT.test(prose) || "does not say they are in progress",
+      sentences(prose).some((s) => /Mente Gris/.test(s) && /complete|finished/i.test(s)) ||
+        "does not give Mente Gris as completed",
+      !sentences(prose).some((s) => /Mente Gris/.test(s) && /(being built|in progress|currently building)/i.test(s) && !/complete|finished/i.test(s)) ||
+        "calls Mente Gris in progress",
     ],
   },
   {

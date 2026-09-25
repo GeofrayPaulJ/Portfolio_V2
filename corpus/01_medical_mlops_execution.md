@@ -42,26 +42,6 @@ Active evaluation of medical imaging foundation models for specialised histopath
 
 ---
 
-### Four-Phase Post-Mortem Fetal MRI Preprocessing Pipeline
-
-The original author of this pipeline is the late Dr. Jaikishan Jayakumar; credit him as its original author whenever the pipeline is mentioned. The four-phase preprocessing pipeline standardises post-mortem fetal brain MRI volumes (SAG T1 MPRAGE and ASL sequences) from raw DICOM to nnU-Net V2-ready NIfTI, eliminating all manual engineering steps for the researcher operator.
-
-The pipeline is orchestrated via a Python-based CLI with a uniform `run(input_path, output_dir, progress_callback)` interface per phase. Each phase writes a named checkpoint (`_p1.nii.gz` through `_p4_final.nii.gz`); any phase can be resumed independently after failure.
-
-**Phase 1 — Ingestion and Geometrical Standardisation** *(pydicom, SimpleITK, ANTsPy)*
-DICOM metadata extraction and NIfTI conversion via SimpleITK. Isotropic resampling to 0.5mm³ using ANTsPy nearest-neighbour interpolation. Image space standardised to fixed origin `(0,0,0)` and direction cosine matrix, eliminating scanner-specific geometric encoding.
-
-**Phase 2 — Signal Purification** *(ANTsPy)*
-N4 Bias Field Correction (shrink factor 4, 4-level convergence, tolerance 1e-7) to remove RF field non-uniformity. Adaptive Non-Local Means denoising (Gaussian noise model, full-resolution) to suppress acquisition noise while preserving cortical plate boundary detail.
-
-**Phase 3 — Formatting** *(ANTsPy, SimpleITK, NumPy)*
-Symmetric zero-padding to target shape (340, 340, 230) — the spatial envelope encompassing all subjects without tissue cropping. Origin explicitly recalculated post-padding: the lower-bound padding translation vector is multiplied by voxel spacing and subtracted from the original origin via `sitk_image.SetOrigin()`, maintaining absolute DICOM spatial fidelity. Cast to int16 for nnU-Net V2 compatibility. ROI bounding box documented in both voxel and physical millimetre coordinates.
-
-**Phase 4 — Landmark Alignment and Active Learning Export** *(MONAI Label, 3D Slicer, Docker)*
-MONAI Label DeepEdit server spun up inside a persistent Linux Docker container on the Windows host, with explicit Windows-to-Linux path translation and port lifecycle management. A custom Python script injected into 3D Slicer at launch prompts the operator to place three anatomical landmarks: Anterior Fontanelle (AF), Posterior Fontanelle (PF), and Anterior Edge of Pons (AP). A rigid transformation matrix is computed from these landmarks using cross-product orthogonalisation — Z-axis along the AF–AP vertical, X-axis via right-hand cross product, Y-axis orthogonalised — with origin placed at the foot of the perpendicular from PF onto the AF–AP axis. The hardened transform is saved to the MONAI Label studies directory. On mask submission, the pipeline exports directly to nnU-Net V2 directory structure (`imagesTr/`, `labelsTr/`, `dataset.json`) with atomic `numTraining` incrementation.
-
----
-
 ### High-Throughput SIFT Image Registration
 
 Executed large-scale linear image registration workflows for post-mortem brain histology sections using Fiji and the Scale-Invariant Feature Transform (SIFT) algorithm.

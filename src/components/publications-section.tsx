@@ -14,7 +14,7 @@ export default function PublicationsSection() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <section id="publications" className="relative py-32">
+      <section id="papers" className="relative py-32">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sky-500/20 to-transparent" />
 
         <div className="max-w-6xl mx-auto px-6" ref={ref}>
@@ -25,7 +25,7 @@ export default function PublicationsSection() {
             className="mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
-              Publications
+              Papers and Reports
             </h2>
           </motion.div>
 

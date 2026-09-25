@@ -19,7 +19,7 @@ export const skills: Skill[] = [
   },
   {
     label: "Computational pathology",
-    text: "Whole-slide image pipelines, IHC analysis, CD34 microvessel segmentation, astrocyte detection. Work.",
+    text: "Whole-slide image pipelines, IHC analysis, CD34 microvessel segmentation. Work.",
   },
   {
     label: "Neuroimaging",
@@ -51,6 +51,6 @@ export const skills: Skill[] = [
   },
   {
     label: "Outside work",
-    text: "Violin, beginner (A and D major scales).",
+    text: "Keyboard, upper intermediate; violin, beginner.",
   },
 ];

@@ -3,7 +3,7 @@ title: "Personal Projects"
 category: "personal_projects"
 ---
 
-All three personal projects are currently being built (status: "Currently building"). Page: /#projects
+Mnemosyne and ARBITER are currently being built (status: "Currently building"). Mente Gris is completed (status: "Completed"). Page: /#projects
 
 ### Mnemosyne: personal long-term memory system
 * Summary: A voice-first system for remembering. Spoken notes are transcribed, stored and retrieved on request. Every memory records where and when it came from, and memories that fall out of use drop to lower activation tiers instead of being deleted. Designed to adapt as models change rather than depend on any one of them.
@@ -16,7 +16,6 @@ All three personal projects are currently being built (status: "Currently buildi
 * Models: Qwen3-VL 4B and 8B, Gemma 3 4B, InternVL3.5 8B, MiniCPM-V 4.5.
 * Next: public release as a pip package, a Hugging Face dataset and a live demo.
 
-### GHOST: offline habit tracker for Android
+### Mente Gris: offline habit tracker for Android (completed)
 * Summary: A habit-tracking app with levels, streaks and reminders that runs entirely on the device. Access is protected by biometric login or a salted, hashed PIN, and the release build has no network permission.
 * Built: Expo and strict TypeScript; type checks, unit tests and the production bundle pass.
-* Next: APK packaging.

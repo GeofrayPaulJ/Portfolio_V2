@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/api/alfred-cs": ["./corpus/**/*.md"],
   },
+  // Removed technical notes: send old links to the notes section.
+  async redirects() {
+    return ["cd34-dab-thresholding", "wsi-tile-boundary", "mri-preprocessing-pipeline"].map((slug) => ({
+      source: `/notes/${slug}`,
+      destination: "/#documentation",
+      permanent: true,
+    }));
+  },
 };
 
 export default nextConfig;
