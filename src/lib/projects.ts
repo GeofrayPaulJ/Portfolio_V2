@@ -54,7 +54,7 @@ export const personalProjects: PersonalProject[] = [
   },
   {
     name: "Mente Gris",
-    tagline: "Offline habit tracker for Android",
+    tagline: "Offline habit tracker for Android, for personal use",
     status: "Completed",
     summary:
       "A habit-tracking app with levels, streaks and reminders that runs entirely on the device. Access is protected by biometric login or a salted, hashed PIN, and the release build has no network permission.",

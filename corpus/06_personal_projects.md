@@ -16,6 +16,6 @@ Mnemosyne and ARBITER are currently being built (status: "Currently building"). 
 * Models: Qwen3-VL 4B and 8B, Gemma 3 4B, InternVL3.5 8B, MiniCPM-V 4.5.
 * Next: public release as a pip package, a Hugging Face dataset and a live demo.
 
-### Mente Gris: offline habit tracker for Android (completed)
+### Mente Gris: offline habit tracker for Android, for personal use (completed)
 * Summary: A habit-tracking app with levels, streaks and reminders that runs entirely on the device. Access is protected by biometric login or a salted, hashed PIN, and the release build has no network permission.
 * Built: Expo and strict TypeScript; type checks, unit tests and the production bundle pass.
