@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Geofray Paul J | AI Engineer, Medical Imaging & MLOps",
   description:
-    "AI Engineer specialising in medical imaging and MLOps. Building, optimising, and deploying high-performance deep learning architectures for Terabyte-scale pathology workflows. Expert in nnU-Net, CUDA, DGX A100, and production ML systems.",
+    "AI engineer in medical imaging: segmentation and classification, computational pathology and neuroimaging, and the infrastructure that trains and serves the models.",
   keywords: [
     "AI Engineer",
     "Medical Imaging",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Geofray Paul J, AI Engineer",
     description:
-      "AI Engineer specialising in medical imaging and MLOps.",
+      "AI engineer in medical imaging: segmentation and classification, computational pathology and neuroimaging, and the infrastructure that trains and serves the models.",
     type: "website",
     locale: "en_US",
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Geofray Paul J, AI Engineer",
     description:
-      "AI Engineer specialising in medical imaging and MLOps.",
+      "AI engineer in medical imaging: segmentation and classification, computational pathology and neuroimaging, and the infrastructure that trains and serves the models.",
   },
   robots: {
     index: true,

@@ -25,7 +25,7 @@ B.Tech, Computer Science and Engineering (AI specialisation), Karunya Institute 
 * Foundation models: SAM, MedSAM, UNI, CONCH; LoRA fine-tuning. Work.
 * Computational pathology: whole-slide image pipelines, IHC analysis, CD34 microvessel segmentation, astrocyte detection. Work.
 * Neuroimaging: MRI preprocessing, orientation checks, annotation quality control. Work.
-* Evaluation: testing on hospitals a model never saw, patient-level leakage checks, statistical comparison of models. Across the three challenges.
+* Evaluation: held-out-centre and external-cohort testing with near-duplicate-grouped splits (RARE26); bootstrap confidence intervals and a detection threshold fixed before test (AIMS-TBI).
 * Deployment: Docker inference containers within strict size and time limits; checksum-based provenance for reproducibility; DGX A100 at work.
 * LLM engineering: vLLM serving on a RunPod serverless endpoint (Mnemosyne); a Gemini agent over a full-context knowledge base with automated answer and number checks (this site); agentic development with Claude Code.
 * Software: Python, TypeScript; React, Next.js on Vercel, Expo; Django REST, Celery, Redis.

@@ -27,7 +27,7 @@ export const skills: Skill[] = [
   },
   {
     label: "Evaluation",
-    text: "Testing on hospitals a model never saw, patient-level leakage checks, statistical comparison of models. Across the three challenges.",
+    text: "Held-out-centre and external-cohort testing with near-duplicate-grouped splits (RARE26); bootstrap confidence intervals and a detection threshold fixed before test (AIMS-TBI).",
   },
   {
     label: "Deployment",
