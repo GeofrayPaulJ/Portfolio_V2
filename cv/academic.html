@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Geofray Paul J, Curriculum Vitae</title>
+<link rel="stylesheet" href="cv.css">
+<style>body { font-size: 9.3pt; line-height: 1.34; } h2 { margin: 8pt 0 4pt; }</style>
+</head>
+<body>
+<h1>Geofray Paul J</h1>
+<p class="tagline">Medical image analysis · Computational radiology, neuroimaging and computational pathology</p>
+<p class="contact">
+  <a href="mailto:geofraypaul1223@gmail.com">geofraypaul1223@gmail.com</a> · Chennai, India · open to relocation ·
+  <a href="https://www.linkedin.com/in/geofraypaulj1212">https://www.linkedin.com/in/geofraypaulj1212</a> ·
+  <a href="https://github.com/GeofrayPaulJ">https://github.com/GeofrayPaulJ</a> ·
+  <a href="https://geofraypaul.vercel.app">https://geofraypaul.vercel.app</a>
+</p>
+
+<h2>Research interests</h2>
+<p>Failure modes of medical image analysis models and how to measure them: small-lesion recall under class imbalance, validation optimism under centre and prevalence shift, rare-class label assignment, and annotation quality as a ceiling on measured performance. Applied in computational radiology, chiefly neuroimaging (traumatic brain injury, intracranial aneurysms on CTA and MRA, post-mortem fetal brain MRI); in computational pathology (whole-slide images of brain tissue); and in endoscopy.</p>
+
+<h2>Education</h2>
+<div class="row"><strong>B.Tech, Computer Science and Engineering (Artificial Intelligence)</strong><span class="when">2020 – 2024</span></div>
+<p>Karunya Institute of Technology and Sciences, Coimbatore, India</p>
+
+<h2>Publications</h2>
+<ul class="refs">
+  <li>[1] <strong>Geofray Paul J</strong>. Diagnosing the Recall Tail: A Class-Imbalance Study of nnU-Net for Detection and Segmentation of Heterogeneous Moderate–Severe TBI Lesions. <em>AIMS-TBI Workshop, MICCAI 2026, Strasbourg, France.</em> Lecture Notes in Computer Science, Springer. Accepted, to appear. Sole author.</li>
+</ul>
+
+<h2>Other outputs</h2>
+<ul class="refs">
+  <li>[2] <strong>Geofray Paul J</strong>. Your GPU Is Lying To You: And So Is Your Test Harness, Your Docstring, Your Validation Set, and Your Cross-Validation. <em>MICCAI Educational Challenge 2026</em>, finalist. <a href="https://openreview.net/forum?id=68qQDKMuwi">OpenReview</a> · code: <a href="https://github.com/GeofrayPaulJ/MEC">github.com/GeofrayPaulJ/MEC</a></li>
+  <li>[3] <strong>Geofray Paul J</strong>. Below the Noise Floor: A Domain-Generalised ConvNeXt Ensemble for Barrett’s Neoplasia Detection. Method report, <em>RARE26 challenge (EndoVis, MICCAI 2026)</em>, submitted. Code: <a href="https://github.com/GeofrayPaulJ/rare26-submission">github.com/GeofrayPaulJ/rare26-submission</a></li>
+  <li>[4] RARE26 organisers and participating teams, including <strong>Geofray Paul J</strong>. Journal article summarising the RARE26 challenge (EndoVis, MICCAI 2026). In preparation; co-author as a participating team, at the organisers’ invitation.</li>
+</ul>
+
+<h2>Challenge research: MICCAI 2026, solo entries</h2>
+<div class="entry keep">
+  <p><strong>AIMS-TBI 2026.</strong> Lesion detection and segmentation in moderate–severe traumatic brain injury, T1-weighted MRI.</p>
+  <p><span class="label">Result.</span> 8th of 22 entries on the final detection leaderboard (balanced accuracy 0.846); 11th of 17 on segmentation (lesion Dice 0.505) (official ranking announced 1 October 2026).</p>
+  <p><span class="label">Method.</span> Self-configuring nnU-Net (ResEnc-M, 3D, five-fold ensemble) trained on 552 subjects. One model serves both tasks; the detection threshold was fixed on out-of-fold predictions and never tuned on later data.</p>
+  <p><span class="label">Finding.</span> Much of the apparent boundary error was a small-lesion recall tail: 22 of 305 cases (7.2%) failed outright, none above the median lesion volume, and excluding them lowered mean ASSD from 8.55 to 6.19 mm. Threshold lowering, batch Dice and test-time mirroring left the tail intact. Paper [1].</p>
+</div>
+<div class="entry keep">
+  <p><strong>MICCAI Educational Challenge 2026.</strong> Finalist.</p>
+  <p><span class="label">Tutorial [2].</span> Built from the AIMS-TBI container work: six instruments that reported success while being wrong (a CUDA availability check masking a silent CPU fallback, a test harness, a docstring, a validation set, a calibrated threshold, cross-validation), each with its mechanism and the rule that catches it, plus a ten-point preflight checklist that runs on synthetic data.</p>
+</div>
+<div class="entry keep">
+  <p><strong>TopAneu 2026, Task 2.</strong> Vessel-specific intracranial aneurysm segmentation, CTA and MRA.</p>
+  <p><span class="label">Result.</span> 10th of 30 entries, Task 2 final test phase (mean position 10.1 across seven metrics); Dice 0.1521 against the winning entry’s 0.2632. Task 1 result pending.</p>
+  <p><span class="label">Method.</span> nnU-Net v2 detection with separate CTA and MRA models, then gradient-boosted assignment of each aneurysm to one of 52 vessel sites from laterality-invariant geometric features, with vessel context from the organisers’ public TopBrain model and a second classifier rejecting false positives; 218 s per CTA case (limit 720 s).</p>
+  <p><span class="label">Finding.</span> Detection was not the bottleneck. Most errors were correct detections assigned to the wrong vessel, concentrated in sites with fewer than ten training examples; nine of the 52 classes had none.</p>
+</div>
+<div class="entry keep">
+  <p><strong>RARE26 (EndoVis).</strong> Barrett’s oesophagus neoplasia classification at 1:100 prevalence, endoscopy.</p>
+  <p><span class="label">Result.</span> Open Development phase: AUROC 0.6466, PPV@90Recall 0.0113. Co-author of the challenge overview paper [4].</p>
+  <p><span class="label">Method.</span> Five-member ConvNeXt-Base ensemble with augmentation at two to three times typical magnitude against acquisition-centre shortcuts; near-duplicate-grouped and leave-one-centre-out cross-validation; a 100-image external cohort held for evaluation only.</p>
+  <p><span class="label">Finding.</span> Both internal estimates overshot the platform result (PPV@90Recall 0.0113): pooled out-of-fold by about sevenfold, leave-one-centre-out by two- to threefold. Pooled cross-validation was the more misleading estimate under the shift between centres. The cause of the gap remains unresolved after ten tested hypotheses. Report [3].</p>
+</div>
+
+<h2>Research engineering experience</h2>
+<div class="row"><strong>Junior AI Engineer, Sudha Gopalakrishnan Brain Centre, IIT Madras</strong><span class="when">Chennai · November 2025 – present</span></div>
+<ul>
+  <li><strong>Post-mortem fetal brain MRI.</strong> nnU-Net and nnSAM skull-stripping models; found and fixed a silent orientation error that transposed predictions, and set the brain-boundary convention against a public fetal brain atlas. nnU-Net trained on masks including CSF, with fold 0 fine-tuned on expert-annotated masks.</li>
+  <li><strong>Grey/white matter segmentation in multiple sclerosis.</strong> HookNet on H&amp;E whole-slide images (Dice 0.85 grey matter, 0.75 white matter). Traced a flat boundary metric to coarse white-matter annotations rather than the model, using a per-class surface-Dice tolerance sweep; effort was redirected to re-annotation instead of further training.</li>
+  <li><strong>CD34 microvessel segmentation.</strong> nnU-Net v2 pipeline quantifying microvessel density across gigapixel whole-slide images (Dice 0.71); removed tile-boundary artefacts with Gaussian-weighted overlap-averaged inference.</li>
+  <li><strong>IHC analysis platform.</strong> Multi-marker inference (CD68, CD34, astrocytes) behind one React, Django and Celery/Redis service on a DGX A100; resolved container crashes on TIFF workloads of up to 150 GB.</li>
+  <li><strong>Specimen provenance.</strong> Mapped the brain-specimen lifecycle (acquisition, sectioning, staining, QR-coded tracking, scanning, storage) and its physical edge cases through interviews with laboratory staff; designed the relational data model, built the tracking interface, and delivered BPMN/UML provenance diagrams to the CSO.</li>
+  <li><strong>Infrastructure.</strong> Persistent, containerised GPU training on the DGX A100 (Docker, tmux). Also built the centre’s public website (sgbc.humanbrain.in) and the BRICS 2026 Neuroscience Symposium pages.</li>
+</ul>
+<p class="break"><strong>Career break (health)</strong>, June 2024 – October 2025. Fully recovered.</p>
+
+<h2>Ongoing work</h2>
+<p><strong>ARBITER</strong>, a benchmark for vision-language models reading charts. Tasks are generated by code, so every answer is exact; difficulty changes one factor at a time, and a search finds where each model starts to fail (Qwen3-VL, Gemma 3, InternVL3.5, MiniCPM-V). Synthetic by design: medical labels vary between annotators and cannot be shared publicly, so they cannot validate a measuring instrument.</p>
+
+<h2>Methods and tools</h2>
+<p><strong>Models:</strong> nnU-Net v2 (ResEnc presets), HookNet, ConvNeXt ensembles, gradient-boosted trees; SAM, MedSAM, nnSAM, PathoSAM, UNI, CONCH; LoRA fine-tuning.<br>
+<strong>Evaluation:</strong> near-duplicate-grouped and leave-one-centre-out cross-validation, external cohorts, bootstrap confidence intervals, thresholds fixed before test; Dice, surface Dice, HD95, ASSD, AUROC, PPV at fixed recall, MCC.<br>
+<strong>Imaging data:</strong> structural and post-mortem fetal MRI, CTA and MRA; gigapixel whole-slide images (H&amp;E, IHC); endoscopy; DICOM, NIfTI; MRI preprocessing, orientation and annotation quality control.<br>
+<strong>Compute:</strong> PyTorch, CUDA, AMP and bf16, DDP, Nsight Systems; Docker and time-limited containerised inference on grand-challenge.org; checksum-based provenance; Linux, tmux; DGX A100.<br>
+<strong>Software:</strong> Python, TypeScript, SQL; Django REST Framework, Celery, Redis; React, Next.js; vLLM serving.</p>
+
+<h2>Languages</h2>
+<p>English (fluent), Tamil (native), Spanish (A2).</p>
+</body>
+</html>

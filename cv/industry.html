@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Geofray Paul J, Résumé</title>
+<link rel="stylesheet" href="cv.css">
+</head>
+<body>
+<h1>Geofray Paul J</h1>
+<p class="tagline">AI Engineer · Medical Imaging and MLOps</p>
+<p class="contact">
+  <a href="mailto:geofraypaul1223@gmail.com">geofraypaul1223@gmail.com</a> · Chennai, India · open to relocation ·
+  <a href="https://www.linkedin.com/in/geofraypaulj1212">https://www.linkedin.com/in/geofraypaulj1212</a> ·
+  <a href="https://github.com/GeofrayPaulJ">https://github.com/GeofrayPaulJ</a> ·
+  <a href="https://geofraypaul.vercel.app">https://geofraypaul.vercel.app</a>
+</p>
+
+<h2>Summary</h2>
+<p>AI engineer for medical imaging: segmentation and classification models for computational pathology (gigapixel whole-slide images) and computational radiology (neuroimaging: MRI, CTA), and the infrastructure that trains and serves them, from nnU-Net failure analysis to containerised inference and Django/Celery services on a DGX A100. Sole author of an accepted MICCAI 2026 workshop paper; four solo MICCAI 2026 challenge entries.</p>
+
+<h2>Experience</h2>
+<div class="row"><strong>Junior AI Engineer, Sudha Gopalakrishnan Brain Centre, IIT Madras</strong><span class="when">Chennai · November 2025 – present</span></div>
+<ul>
+  <li><strong>CD34 microvessel segmentation.</strong> Built an nnU-Net v2 pipeline that quantifies microvessel density across gigapixel whole-slide images (Dice 0.71); removed tile-boundary artefacts with Gaussian-weighted overlap-averaged inference.</li>
+  <li><strong>Grey/white matter segmentation.</strong> Trained HookNet on multiple sclerosis H&amp;E whole-slide images (Dice 0.85 grey matter, 0.75 white matter). Traced a flat boundary metric to coarse white-matter annotations, not the model, with a per-class surface-Dice tolerance sweep; redirected effort to re-annotation instead of further training.</li>
+  <li><strong>IHC analysis platform.</strong> Multi-marker inference service (CD68, CD34, astrocyte) behind one React, Django and Celery/Redis interface, deployed on a DGX A100; resolved container crashes on TIFF workloads of up to 150 GB.</li>
+  <li><strong>Fetal brain skull-stripping.</strong> nnU-Net and nnSAM models for post-mortem fetal brain MRI; found and fixed a silent orientation error that transposed predictions, and set the brain-boundary convention against a public fetal brain atlas. nnU-Net trained on masks including CSF, with fold 0 fine-tuned on expert-annotated masks.</li>
+  <li><strong>Specimen tracking system.</strong> Mapped the brain-specimen lifecycle (acquisition to QR-coded tracking, scanning and storage) and its physical edge cases through interviews with lab staff; designed the relational data model and ORM layer, built the tracking interface, and delivered BPMN/UML provenance diagrams to the CSO.</li>
+  <li><strong>GPU infrastructure.</strong> Set up persistent training on a DGX A100 in Docker-isolated environments under tmux.</li>
+  <li><strong>Web.</strong> Built the institute’s public website (sgbc.humanbrain.in) and BRICS 2026 Neuroscience Symposium pages solo in React.</li>
+</ul>
+<p class="break"><strong>Career break (health)</strong>, June 2024 – October 2025. Fully recovered.</p>
+
+<h2>MICCAI 2026 challenges (solo entries)</h2>
+<ul>
+  <li><strong>AIMS-TBI 2026</strong>, TBI lesion detection and segmentation (T1 MRI). nnU-Net ensemble: 8th of 22 entries on the final detection leaderboard (balanced accuracy 0.846); 11th of 17 on segmentation (lesion Dice 0.505) (official ranking announced 1 October 2026). Traced boundary error to a small-lesion recall tail: 7.2% of cases failed outright, none above median lesion volume.</li>
+  <li><strong>MICCAI Educational Challenge 2026</strong>, finalist. <em>Your GPU Is Lying To You</em>: six instruments that reported success while being wrong during a challenge submission, and a ten-point preflight checklist. Code public.</li>
+  <li><strong>TopAneu 2026, Task 2</strong>, vessel-specific intracranial aneurysm segmentation (CTA, MRA). 10th of 30 entries, Task 2 final test phase. nnU-Net detection, then gradient-boosted vessel-site classification on laterality-invariant geometry; 218 s per case against a 720 s limit. Most errors were correct detections assigned to the wrong vessel.</li>
+  <li><strong>RARE26 (EndoVis)</strong>, Barrett’s neoplasia classification at 1:100 prevalence. Five-model ConvNeXt ensemble for Barrett’s neoplasia detection; both internal estimates overshot the platform result, the held-out-centre estimate least. Method report submitted; co-author of the organisers’ challenge overview paper (in preparation).</li>
+</ul>
+
+<h2>Publication</h2>
+<p>Geofray Paul J. <em>Diagnosing the Recall Tail: A Class-Imbalance Study of nnU-Net for Detection and Segmentation of Heterogeneous Moderate–Severe TBI Lesions.</em> AIMS-TBI Workshop, MICCAI 2026. Springer LNCS, accepted, to appear.</p>
+
+<h2>Technical skills</h2>
+<p><strong>Medical imaging ML:</strong> PyTorch, nnU-Net v2 (ResEnc), MONAI, HookNet, timm (ConvNeXt), gradient-boosted trees<br>
+<strong>Foundation models:</strong> SAM, MedSAM, nnSAM, PathoSAM, UNI, CONCH; LoRA fine-tuning<br>
+<strong>Imaging data:</strong> gigapixel whole-slide images, DICOM, NIfTI, MRI preprocessing and orientation checks, annotation quality control<br>
+<strong>Evaluation:</strong> grouped and leave-one-centre-out cross-validation, bootstrap CIs, Dice, HD95, surface Dice, AUROC<br>
+<strong>MLOps:</strong> Docker, CUDA, DGX A100, AMP and bf16, DDP, Nsight Systems, Linux, tmux; time-limited containerised inference<br>
+<strong>Software:</strong> Python, TypeScript, SQL; Django REST Framework, Celery, Redis; React, Next.js<br>
+<strong>LLM and VLM:</strong> vLLM serving on RunPod serverless (Mnemosyne); Gemini agent over a full-context knowledge base (portfolio assistant); VLM chart-reading benchmark with exact, code-generated answers (ARBITER, in progress)</p>
+
+<h2>Education and languages</h2>
+<div class="row"><strong>B.Tech, Computer Science and Engineering (Artificial Intelligence)</strong><span class="when">2020 – 2024</span></div>
+<p>Karunya Institute of Technology and Sciences, Coimbatore</p>
+<p>Languages: English (fluent), Tamil (native), Spanish (A2).</p>
+</body>
+</html>

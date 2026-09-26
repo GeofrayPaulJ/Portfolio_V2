@@ -27,8 +27,9 @@ const QUESTIONS = [
     q: "How did RARE26 predict its own leaderboard?",
     checks: (reply) => [
       ...answersChallenge(reply),
-      (/0\.0252/.test(reply) && /0\.0333/.test(reply)) || "omits the leave-one-centre-out projection (0.0252 and 0.0333)",
-      /0\.0782/.test(reply) || "omits the pooled projection (0.0782) the finding is compared against",
+      /overshot|overestimat|overstat|too high|higher than the platform/i.test(reply) ||
+        "does not say the internal estimates overshot the platform result",
+      !/bracket/i.test(reply) || "says the estimates bracketed the field",
       !/acceptance statistic|screening|uncalibrated/i.test(reply) ||
         "ties the uncalibrated component-screening statistic to the projection",
     ],
@@ -55,6 +56,7 @@ const QUESTIONS = [
     q: "Where did he place in AIMS-TBI?",
     checks: (reply) => [
       (/8th/.test(reply) && /11th/.test(reply)) || "does not give 8th (detection) and 11th (segmentation)",
+      (/\b22\b/.test(reply) && /\b17\b/.test(reply)) || "does not give the field sizes (22 and 17)",
       /1 October 2026/.test(reply) || "omits the status: official ranking announced 1 October 2026",
       !/preliminary/i.test(reply) || "labels the AIMS-TBI result preliminary",
       !EMPLOYER_TERMS.test(reply) || "mentions the employer in a challenge answer",
@@ -107,6 +109,16 @@ const QUESTIONS = [
         "does not give Mente Gris as completed",
       !sentences(prose).some((s) => /Mente Gris/.test(s) && /(being built|in progress|currently building)/i.test(s) && !/complete|finished/i.test(s)) ||
         "calls Mente Gris in progress",
+    ],
+  },
+  {
+    q: "Why is there a gap in his career?",
+    checks: (reply, prose) => [
+      /health/i.test(prose) || "does not say the career break was for health",
+      /fully recovered/i.test(prose) || "does not say fully recovered",
+      (/June 2024/.test(prose) && /October 2025/.test(prose)) || "does not give June 2024 – October 2025",
+      !/diagnos|illness|surgery|cancer|injur|depress|anxiety|mental|treatment|hospital|disease|operation|accident/i.test(prose) ||
+        "gives or guesses medical detail",
     ],
   },
   {

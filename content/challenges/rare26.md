@@ -10,15 +10,15 @@
 
 At the time, the field's ten highest visible entries ranged from PPV@90Recall 0.0243 to 0.0332.
 
+Co-author, as a participating team and at the organisers' invitation, of the organisers' journal article summarising the RARE26 challenge (in preparation).
+
 RARE26 (Recognition of Abnormalities in low-pREvalence cancer) is part of EndoVis at MICCAI 2026. The task is to classify Barrett's oesophagus endoscopy images as neoplastic or non-dysplastic. Scoring is positive predictive value at 90% recall (PPV@90Recall) under simulated 1:100 prevalence: a ranking metric whose threshold is set by the lowest-scoring positives. I entered as an independent researcher.
 
 ## The finding
 
-With 158 positive cases, a held-out-centre estimate computed before any leaderboard existed bracketed the eventual field, while the pooled estimate overshot it roughly 2.5-fold.
+Both internal estimates overshot the platform result (PPV@90Recall 0.0113): pooled out-of-fold by about sevenfold, leave-one-centre-out by two- to threefold. Pooled cross-validation was the more misleading estimate under the shift between centres.
 
-In July, before any leaderboard existed, I projected PPV@90Recall onto the test set's 1:100 shape from leave-one-centre-out predictions. The two held-out directions gave 0.0252 and 0.0333, bracketing the ten highest visible entries. The pooled out-of-fold projection gave 0.0782, roughly 2.5 times higher.
-
-The held-out-centre estimate was therefore the better predictor of test behaviour under prevalence shift, despite its wider uncertainty. The pooled estimate is more precise on its own terms; that precision did not transfer.
+In July, before any leaderboard existed, I projected PPV@90Recall onto the test set's 1:100 shape. The pooled out-of-fold projection gave 0.0782; the two leave-one-centre-out directions gave 0.0252 and 0.0333. With 158 training positives, the held-out-centre estimates had the wider uncertainty but overshot less.
 
 ## Approach
 

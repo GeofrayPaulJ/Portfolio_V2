@@ -1,0 +1,35 @@
+@page { size: A4; margin: 16mm 16mm 18mm 16mm; }
+* { box-sizing: border-box; }
+body {
+  font-family: "Segoe UI", "Calibri", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9.6pt;
+  line-height: 1.38;
+  color: #1f2328;
+  margin: 0;
+}
+a { color: #1f4e8c; text-decoration: none; }
+h1 { font-size: 22pt; margin: 0 0 1pt; letter-spacing: -0.3pt; }
+.tagline { font-size: 11.5pt; color: #1f4e8c; margin: 0 0 3pt; }
+.contact { font-size: 8.8pt; color: #444; margin: 0 0 8pt; }
+h2 {
+  font-size: 10.5pt;
+  color: #1f3a5f;
+  text-transform: uppercase;
+  letter-spacing: 0.3pt;
+  border-bottom: 1px solid #c9d3e0;
+  padding-bottom: 1.5pt;
+  margin: 10pt 0 5pt;
+}
+h3 { font-size: 9.6pt; margin: 6pt 0 2pt; }
+p { margin: 0 0 4pt; }
+ul { margin: 2pt 0 4pt; padding-left: 13pt; }
+li { margin-bottom: 2.5pt; }
+.row { display: flex; justify-content: space-between; gap: 12pt; }
+.row .when { color: #555; white-space: nowrap; }
+.sub { font-style: italic; color: #1f4e8c; margin: 5pt 0 2pt; }
+.entry { margin-bottom: 5pt; }
+.label { font-style: italic; }
+.refs li { list-style: none; margin-left: -13pt; padding-left: 20pt; text-indent: -20pt; }
+.break { color: #444; margin-top: 4pt; }
+section { break-inside: auto; }
+.keep { break-inside: avoid; }

@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Analytics } from "@vercel/analytics/next";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -20,33 +21,40 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Geofray Paul J | AI Engineer, Medical Imaging & MLOps",
-  description:
-    "AI engineer in medical imaging: segmentation and classification, computational pathology and neuroimaging, and the infrastructure that trains and serves the models.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Geofray Paul J | AI Engineer, Medical Imaging & MLOps",
+    template: "%s | Geofray Paul J",
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
   keywords: [
-    "AI Engineer",
-    "Medical Imaging",
-    "MLOps",
-    "Deep Learning",
-    "nnU-Net",
-    "CUDA",
-    "DGX A100",
-    "Computational Pathology",
     "Geofray Paul J",
+    "AI Engineer",
+    "Medical Image Analysis",
+    "Medical Image Segmentation",
+    "Computational Pathology",
+    "Computational Radiology",
+    "Neuroimaging",
+    "nnU-Net",
+    "MICCAI 2026",
+    "MLOps",
   ],
-  authors: [{ name: "Geofray Paul J" }],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Geofray Paul J, AI Engineer",
-    description:
-      "AI engineer in medical imaging: segmentation and classification, computational pathology and neuroimaging, and the infrastructure that trains and serves the models.",
     type: "website",
-    locale: "en_US",
+    url: "/",
+    siteName: SITE_NAME,
+    title: "Geofray Paul J, AI Engineer",
+    description: SITE_DESCRIPTION,
+    locale: "en_GB",
   },
   twitter: {
     card: "summary_large_image",
     title: "Geofray Paul J, AI Engineer",
-    description:
-      "AI engineer in medical imaging: segmentation and classification, computational pathology and neuroimaging, and the infrastructure that trains and serves the models.",
+    description: SITE_DESCRIPTION,
   },
   robots: {
     index: true,
@@ -61,7 +69,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-GB"
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >

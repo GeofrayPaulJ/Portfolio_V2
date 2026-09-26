@@ -70,7 +70,7 @@ export default function HeroSection() {
             {/* Paragraph (Refined Copy) */}
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
               Medical image segmentation and classification, computational
-              pathology and neuroimaging, and the infrastructure that trains
+              pathology, computational radiology and neuroimaging, and the infrastructure that trains
               and serves the models.
             </p>
 

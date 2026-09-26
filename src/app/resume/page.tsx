@@ -30,13 +30,22 @@ export default function ResumePage() {
               Back to Portfolio
             </Button>
           </Link>
-          <Button 
-            className="bg-sky-500 hover:bg-sky-600 text-white gap-2 border-none"
-            onClick={() => window.print()}
-          >
-            <Download size={16} />
-            Download PDF
-          </Button>
+          <div className="flex flex-wrap justify-end gap-2">
+            <a
+              href="/Geofray_Paul_J_CV.pdf"
+              className="inline-flex items-center gap-2 rounded-md bg-sky-500 hover:bg-sky-600 px-4 py-2 text-sm font-medium text-white"
+            >
+              <Download size={16} />
+              Industry résumé (PDF)
+            </a>
+            <a
+              href="/Geofray_Paul_J_CV_Academic.pdf"
+              className="inline-flex items-center gap-2 rounded-md border border-sky-500 px-4 py-2 text-sm font-medium text-sky-500 hover:bg-sky-500/10"
+            >
+              <Download size={16} />
+              Academic CV (PDF)
+            </a>
+          </div>
         </motion.div>
 
         <style jsx global>{`
@@ -75,7 +84,16 @@ export default function ResumePage() {
           className="mb-16"
         >
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">Geofray Paul J</h1>
-          <p className="text-xl md:text-2xl text-sky-500 font-medium mb-8">AI Engineer | Medical Imaging & MLOps</p>
+          <p className="text-xl md:text-2xl text-sky-500 font-medium mb-4">AI Engineer | Medical Imaging & MLOps</p>
+          <p className="text-sm text-muted-foreground leading-relaxed break-words">
+            <a href="mailto:geofraypaul1223@gmail.com" className="hover:text-sky-500 underline-offset-2 hover:underline">geofraypaul1223@gmail.com</a>
+            {" · "}Chennai, India · open to relocation{" · "}
+            <a href="https://www.linkedin.com/in/geofraypaulj1212" target="_blank" rel="noopener noreferrer" className="hover:text-sky-500 underline-offset-2 hover:underline">https://www.linkedin.com/in/geofraypaulj1212</a>
+            {" · "}
+            <a href="https://github.com/GeofrayPaulJ" target="_blank" rel="noopener noreferrer" className="hover:text-sky-500 underline-offset-2 hover:underline">https://github.com/GeofrayPaulJ</a>
+            {" · "}
+            <a href="https://geofraypaul.vercel.app" className="hover:text-sky-500 underline-offset-2 hover:underline">https://geofraypaul.vercel.app</a>
+          </p>
         </motion.header>
 
         {/* Profile Summary */}
@@ -87,7 +105,7 @@ export default function ResumePage() {
         >
           <h2 className="text-sm uppercase tracking-[0.2em] text-sky-500 font-bold mb-6">Profile</h2>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            AI engineer in medical imaging: segmentation and classification models, computational pathology and neuroimaging pipelines, and the infrastructure that trains and serves them. Entered four MICCAI 2026 challenges as an independent researcher.
+            AI engineer in medical imaging: segmentation and classification models, computational pathology, computational radiology and neuroimaging pipelines, and the infrastructure that trains and serves them. Entered four MICCAI 2026 challenges as an independent researcher.
           </p>
         </motion.section>
 
@@ -107,6 +125,7 @@ export default function ResumePage() {
                   <div className="absolute w-3 h-3 bg-sky-500 rounded-full -left-[6.5px] top-1.5 shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="text-xl font-bold">Junior AI Engineer</h3>
+                    <span className="text-sm font-mono text-muted-foreground">November 2025 – present</span>
                   </div>
                   <p className="text-sky-500 font-medium mb-6 text-sm uppercase tracking-wider">Sudha Gopalakrishnan Brain Centre, IIT Madras</p>
                   
@@ -125,7 +144,7 @@ export default function ResumePage() {
                       <ul className="space-y-4 text-muted-foreground list-disc pl-4">
                         <li><strong>CD34 Microvessel Segmentation:</strong> nnU-Net v2 pipeline automating density quantification across gigapixel whole-slide images; eliminated tile-boundary artefacts via overlap-averaged inference.</li>
                         <li><strong>IHC Analysis Platform:</strong> Multi-marker inference backend (CD68, CD34 and astrocyte; beta-amyloid planned) behind a single React + Django + Celery interface; resolved container-crash failures under large TIFF workloads.</li>
-                        <li><strong>Fetal Brain Skull-Stripping:</strong> Skull-stripping models for postmortem fetal brain MRI (nnU-Net and nnSAM). Found and fixed a silent orientation error that transposed predictions, and established the correct brain-boundary convention against a public fetal brain atlas. The model was nnU-Net, trained on masks including CSF, with one fold fine-tuned on corrected masks.</li>
+                        <li><strong>Fetal Brain Skull-Stripping:</strong> Skull-stripping models for postmortem fetal brain MRI (nnU-Net and nnSAM). Found and fixed a silent orientation error that transposed predictions, and established the correct brain-boundary convention against a public fetal brain atlas. nnU-Net trained on masks including CSF, with fold 0 fine-tuned on expert-annotated masks.</li>
                       </ul>
                     </div>
 
@@ -133,7 +152,6 @@ export default function ResumePage() {
                     <div>
                       <h4 className="text-xs font-bold uppercase text-zinc-400 mb-4 tracking-widest border-b border-border/50 pb-2">MLOps, Infrastructure & Systems Architecture</h4>
                       <ul className="space-y-4 text-muted-foreground list-disc pl-4">
-                        <li><strong>Cluster Optimisation:</strong> Profiled and tuned training loops on a DGX A100 cluster using NVIDIA Nsight Systems, AMP, and DDP.</li>
                         <li><strong>Neurological Asset Tracking System:</strong> Interviewed lab personnel to surface physical edge cases across the specimen lifecycle (sectioning, staining, QR-coded digital storage); architected the relational data model and ORM layer, built the tracking interface, and delivered BPMN/UML workflow diagrams to the CSO.</li>
                         <li><strong>Asynchronous Processing:</strong> Django, Celery, and Redis platforms for high-throughput, non-blocking inference.</li>
                       </ul>
@@ -147,6 +165,15 @@ export default function ResumePage() {
                       </ul>
                     </div>
                   </div>
+                </div>
+
+                <div className="relative pl-8 border-l border-border">
+                  <div className="absolute w-3 h-3 bg-muted-foreground/40 rounded-full -left-[6.5px] top-1.5" />
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-xl font-bold">Career break (health)</h3>
+                    <span className="text-sm font-mono text-muted-foreground">June 2024 – October 2025</span>
+                  </div>
+                  <p className="text-muted-foreground">Fully recovered.</p>
                 </div>
               </div>
             </motion.section>
@@ -203,7 +230,7 @@ export default function ResumePage() {
                     >
                       {challenge.name}
                     </Link>
-                    <span>: {challenge.result}</span>
+                    <span>: {challenge.resumeLine ?? challenge.result}</span>
                   </li>
                 ))}
               </ul>

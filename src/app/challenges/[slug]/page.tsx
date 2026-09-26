@@ -7,6 +7,7 @@ import {
 } from "@/lib/challenges";
 import NoteRenderer from "@/components/note-renderer";
 import type { Metadata } from "next";
+import { OG_DEFAULTS } from "@/lib/site";
 
 export async function generateStaticParams() {
   return getAllChallengeSlugs().map((slug) => ({ slug }));
@@ -21,9 +22,12 @@ export async function generateMetadata({
   const meta = getChallengeMetadata(slug);
   if (!meta) return { title: "Challenge Not Found" };
 
+  const title = `${meta.name}: MICCAI 2026 challenge entry`;
   return {
-    title: `${meta.name} | MICCAI 2026 Challenges, Geofray Paul J`,
+    title,
     description: meta.finding,
+    alternates: { canonical: `/challenges/${slug}` },
+    openGraph: { ...OG_DEFAULTS, type: "article", url: `/challenges/${slug}`, title, description: meta.finding },
   };
 }
 

@@ -6,7 +6,7 @@
 
 ## Result
 
-8th on the final detection leaderboard; 11th on segmentation (official ranking announced 1 October 2026).
+8th of 22 entries on the final detection leaderboard; 11th of 17 on segmentation (official ranking announced 1 October 2026).
 
 | Task | Final-phase scores |
 |---|---|

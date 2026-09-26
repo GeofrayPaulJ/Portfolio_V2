@@ -6,11 +6,11 @@
 
 ## Result
 
-Task 2 final test phase: 10th, mean position 10.0 across seven metrics. Team Prometheus, solo entrant.
+10th of 30 entries, Task 2 final test phase: mean position 10.1 across seven metrics. Team Prometheus, solo entrant.
 
 | Metric | Value |
 |---|---|
-| Dice | 0.1521 |
+| Dice | 0.1521 (winning entry: 0.2632) |
 | Precision | 0.4367 |
 | F1 | 0.3110 |
 | Recall | 0.3499 |

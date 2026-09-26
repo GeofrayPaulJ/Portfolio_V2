@@ -15,19 +15,19 @@ export const skills: Skill[] = [
   },
   {
     label: "Foundation models",
-    text: "SAM, MedSAM, UNI, CONCH; LoRA fine-tuning. Work.",
+    text: "SAM, MedSAM, UNI, CONCH; LoRA fine-tuning.",
   },
   {
     label: "Computational pathology",
-    text: "Whole-slide image pipelines, IHC analysis, CD34 microvessel segmentation. Work.",
+    text: "Whole-slide image pipelines, IHC analysis, CD34 microvessel segmentation.",
   },
   {
-    label: "Neuroimaging",
-    text: "MRI preprocessing, orientation checks, annotation quality control. Work.",
+    label: "Computational radiology and neuroimaging",
+    text: "MRI preprocessing, orientation checks, annotation quality control.",
   },
   {
     label: "Evaluation",
-    text: "Held-out-centre and external-cohort testing with near-duplicate-grouped splits (RARE26); bootstrap confidence intervals and a detection threshold fixed before test (AIMS-TBI).",
+    text: "Leakage-aware data splits, held-out testing, bootstrap confidence intervals, thresholds fixed before test.",
   },
   {
     label: "Deployment",
@@ -35,7 +35,7 @@ export const skills: Skill[] = [
   },
   {
     label: "LLM engineering",
-    text: "vLLM serving on a RunPod serverless endpoint (Mnemosyne); a Gemini agent over a full-context knowledge base with automated answer and number checks (this site); agentic development with Claude Code.",
+    text: "vLLM serving on a RunPod serverless endpoint (Mnemosyne); a Gemini agent over a full-context knowledge base with automated answer and number checks (portfolio assistant); agentic development with Claude Code.",
   },
   {
     label: "Software",
@@ -43,7 +43,7 @@ export const skills: Skill[] = [
   },
   {
     label: "Currently learning",
-    text: "Slurm and Apptainer; computational radiology.",
+    text: "Slurm and Apptainer.",
   },
   {
     label: "Languages",

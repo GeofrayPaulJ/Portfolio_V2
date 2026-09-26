@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getNoteMetadata, getNoteContent, getAllNoteSlugs } from "@/lib/notes";
 import NoteRenderer from "@/components/note-renderer";
 import type { Metadata } from "next";
+import { OG_DEFAULTS } from "@/lib/site";
 
 export async function generateStaticParams() {
   return getAllNoteSlugs().map((slug) => ({ slug }));
@@ -18,8 +19,10 @@ export async function generateMetadata({
   if (!meta) return { title: "Note Not Found" };
 
   return {
-    title: `${meta.title} | Technical Notes, Geofray Paul J`,
+    title: meta.title,
     description: meta.description,
+    alternates: { canonical: `/notes/${slug}` },
+    openGraph: { ...OG_DEFAULTS, type: "article", url: `/notes/${slug}`, title: meta.title, description: meta.description },
   };
 }
 
